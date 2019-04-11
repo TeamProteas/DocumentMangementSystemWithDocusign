@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:remove="all">Document Reminder</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div>
+
+    <h2 th:text="${title}"></span>>title</h2>
+    <h4>Greetings, </h4><h4 th:text="${name}"></h4>
+    <p>
+        This is in regard with your documents on the company DMS portal.
+        The following documents are missing from the portal-
+    </p>
+    <p th:text="${description}">
+    </p>
+    <p> you are requested to kindly upload that again</p>
+</div>
+
+</body>
+</html>
