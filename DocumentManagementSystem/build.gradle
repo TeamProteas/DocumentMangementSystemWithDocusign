@@ -1,0 +1,38 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.1.RELEASE'
+	id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.nineleaps'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	compile('org.springframework.security.oauth:spring-security-oauth2')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	implementation 'org.springframework.boot:spring-boot-starter-data-cassandra'
+
+	compile 'com.google.apis:google-api-services-oauth2:v1-rev149-1.25.0'
+	compile group: 'com.google.http-client', name: 'google-http-client', version: '1.25.0'
+	// https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+	compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
+
+	compile 'org.hibernate.validator:hibernate-validator-parent:6.0.14.Final'
+	compile 'org.hibernate.validator:hibernate-validator:6.0.14.Final'
+	// https://mvnrepository.com/artifact/javax.interceptor/javax.interceptor-api
+	compile group: 'javax.interceptor', name: 'javax.interceptor-api', version: '1.2-b06'
+	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
+
+	compile group: 'com.github.vanroy', name: 'spring-boot-starter-data-jest', version: '2.2.0.RELEASE'
+
+	//compile 'org.mockito:mockito-core:2.23.4'
+	compile 'junit:junit:4.12'
+}
