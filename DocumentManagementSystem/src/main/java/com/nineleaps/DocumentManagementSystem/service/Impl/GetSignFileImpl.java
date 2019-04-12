@@ -30,7 +30,7 @@ public class GetSignFileImpl {
         DigitalSignData digitalSignData;
         Response response;
         CustomResponse customResponse = new CustomResponse(new Date(), "Success",
-                "the file Verified Status Changed", HttpStatus.OK.getReasonPhrase());
+                "Downloaded", HttpStatus.OK.getReasonPhrase());
         try {
             digitalSignData = digitalSignRepo.findDocumentRow(name, documentname);
             response = client.downloadSignedDocument(digitalSignData.getSignatureRequestId(), digitalSignData.getDocumentId());
@@ -44,6 +44,8 @@ public class GetSignFileImpl {
             os.close();
         } catch (Exception e) {
             customResponse.setMessage("File Not Present");
+            customResponse.setDetails("File is not signed till now");
+            customResponse.setHttpCodeMessage(HttpStatus.FORBIDDEN.toString());
             e.printStackTrace();
             return new ResponseEntity<CustomResponse>(customResponse,HttpStatus.FORBIDDEN);
         }
