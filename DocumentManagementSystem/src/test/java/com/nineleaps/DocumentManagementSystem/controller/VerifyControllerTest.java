@@ -51,7 +51,7 @@ public class VerifyControllerTest {
     @Test
     public void verifierStatus() throws Exception {
 
-        //ObjectMapper objectMapper=new ObjectMapper();
+
         ResponseEntity<CustomResponse> entity=new ResponseEntity<CustomResponse>(HttpStatus.OK);
         when(verifyService.changeVerifyStatus("107583232828339878102","pancard")).thenReturn(entity);
 
@@ -61,7 +61,7 @@ public class VerifyControllerTest {
                 .param("userId","107583232828339878102")
                 .param("fileType","pancard"));
         ResponseEntity<CustomResponse> test=verifyController.verifierStatus("107583232828339878102","pancard");
-        //ectMapper.writeValueAsString(test);
+
         assertEquals(test.getStatusCode().toString(),"200 OK");
 
     }

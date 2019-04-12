@@ -35,7 +35,6 @@ public class UploadControllerTest {
     private MockMvc mockMvc;
 
 
-
     @Mock
     UploadServiceImpl uploadService;
 
@@ -57,24 +56,20 @@ public class UploadControllerTest {
     @Test
     public void fetchData() throws Exception {
 
-        ObjectMapper objectMapper=new ObjectMapper();
-        ResponseEntity<CustomResponse> entity=new ResponseEntity<CustomResponse>(HttpStatus.OK);
-        when(uploadService.storeData("gkhgkkdjfsfhdflkshfdslhfskhfkdjsldljfhdflkjhfkdslfkh",multipart,"pancard","107583232828339878102")).thenReturn(entity);
+        ObjectMapper objectMapper = new ObjectMapper();
+        ResponseEntity<CustomResponse> entity = new ResponseEntity<CustomResponse>(HttpStatus.OK);
+        when(uploadService.storeData("abcde", multipart, "pancard", "107583232828339878102")).thenReturn(entity);
 
         mockMvc.perform(MockMvcRequestBuilders.post("v1/upload")
                 .accept(MediaType.ALL)
                 .contentType(MediaType.ALL)
-                .header("tokenId", "gkhgkkdjfsfhdflkshfdslhfskhfkdjsldljfhdflkjhfkdslfkh")
+                .header("tokenId", "abcde")
                 .param("multipartfile", String.valueOf(multipart))
-                .param("fileType","pancard")
-                .param("userId","107583232828339878102"));
+                .param("fileType", "pancard")
+                .param("userId", "107583232828339878102"));
 
-        ResponseEntity<CustomResponse> test=uploadController.fetchData("gkhgkkdjfsfhdflkshfdslhfskhfkdjsldljfhdflkjhfkdslfkh",multipart,"pancard","107583232828339878102");
-//        String mapper=objectMapper.writeValueAsString(test);
-        assertEquals(test.getStatusCode().toString(),"200 OK");
-
-
-
+        ResponseEntity<CustomResponse> test = uploadController.fetchData("abcde", multipart, "pancard", "107583232828339878102");
+        assertEquals(test.getStatusCode().toString(), "200 OK");
 
 
     }

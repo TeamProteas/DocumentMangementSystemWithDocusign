@@ -21,7 +21,7 @@ public class    ViewController {
     ViewServiceImpl viewServiceImpl;
 
     @ResponseBody
-    @GetMapping("/v1/view")
+    @GetMapping("v1/view")
     public List<EmployeeData> getView(@RequestHeader(value = "tokenId") String tokenData) throws IOException, ParseException {
         System.out.println("VIEW:");
         return viewServiceImpl.fetchViewData();

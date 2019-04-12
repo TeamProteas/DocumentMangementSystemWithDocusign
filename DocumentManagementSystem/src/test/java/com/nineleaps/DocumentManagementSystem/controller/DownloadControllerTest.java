@@ -50,7 +50,7 @@ public class DownloadControllerTest {
     @Test
     public void downloadFile() throws Exception {
 
-        ObjectMapper objectMapper=new ObjectMapper();
+
         ResponseEntity<Object> entity=new ResponseEntity<Object>(HttpStatus.OK);
         when(downloadService.giveFile("pancard")).thenReturn(entity);
 
@@ -64,8 +64,8 @@ public class DownloadControllerTest {
 
 
         ResponseEntity<Object> test=downloadController.DownloadFile("abcde","pancard");
-        String mapper=objectMapper.writeValueAsString(test);
-        assertEquals(mapper,"{\"headers\":{},\"body\":null,\"statusCodeValue\":200,\"statusCode\":\"OK\"}");
+
+        assertEquals(test.getStatusCode().toString(),"200 OK");
 
 
 

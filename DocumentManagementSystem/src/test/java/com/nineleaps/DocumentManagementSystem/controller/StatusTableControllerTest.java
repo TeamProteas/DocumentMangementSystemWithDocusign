@@ -1,15 +1,13 @@
 package com.nineleaps.DocumentManagementSystem.controller;
 
-import com.nineleaps.DocumentManagementSystem.dao.EmployeeData;
-import com.nineleaps.DocumentManagementSystem.service.Impl.VerifyServiceImpl;
-import com.nineleaps.DocumentManagementSystem.service.Impl.ViewServiceImpl;
+import com.nineleaps.DocumentManagementSystem.dto.StatusTableData;
+import com.nineleaps.DocumentManagementSystem.service.Impl.StatusTableServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,16 +24,13 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
-public class ViewControllerTest {
-
-    @InjectMocks
-    ViewController viewController;
-
-    @Mock
-    ViewServiceImpl viewService;
-
+public class StatusTableControllerTest {
+@InjectMocks
+StatusTableController statusTableController;
     @Autowired
     MockMvc mockMvc;
+    @Mock
+    StatusTableServiceImpl statusTableService;
 
     @Before
     public void setup() {
@@ -43,26 +38,20 @@ public class ViewControllerTest {
         MockitoAnnotations.initMocks(this);
 
         mockMvc = MockMvcBuilders
-                .standaloneSetup(viewController)
+                .standaloneSetup(statusTableController)
 
                 .build();
     }
-
     @Test
-    public void getView() throws Exception {
-        List<EmployeeData> employeeData=new ArrayList<EmployeeData>();
-        when(viewService.fetchViewData()).thenReturn(employeeData);
+    public void getstatus() throws Exception {
+        List<StatusTableData> list=new ArrayList<StatusTableData>();
+        when(statusTableService.getTableData()).thenReturn(list);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("v1/view")
+        mockMvc.perform(MockMvcRequestBuilders.post("v1/table")
                 .accept(MediaType.ALL)
                 .contentType(MediaType.ALL)
-                .header("tokenId", "a"));
-
-        List<EmployeeData> test=viewController.getView("a");
-
+                .header("tokenId", "abcde"));
+        List<StatusTableData> test=statusTableController.getstatus("abcde");
         assertEquals(test.size(),0);
-
-
-
     }
 }

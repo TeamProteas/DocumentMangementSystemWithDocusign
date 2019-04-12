@@ -49,19 +49,19 @@ public class DeleteControllerTest {
 
     @Test
     public void deleteRequest() throws Exception {
-        ObjectMapper objectMapper=new ObjectMapper();
+
         ResponseEntity<CustomResponse> entity=new ResponseEntity<CustomResponse>(HttpStatus.OK);
         when(deleteService.deleteRecord("pancard","107583232828339878102")).thenReturn(entity);
 
         mockMvc.perform(MockMvcRequestBuilders.post("v1/delete")
                 .accept(MediaType.ALL)
                 .contentType(MediaType.ALL)
-                .header("tokenId", "gkhgkkdjfsfhdflkshfdslhfskhfkdjsldljfhdflkjhfkdslfkh")
+                .header("tokenId", "abcde")
                 .param("fileType","pancard")
                 .param("userId","107583232828339878102"));
         ResponseEntity<CustomResponse> test=deleteController.deleteRequest("","pancard","107583232828339878102");
-        String mapper=objectMapper.writeValueAsString(test);
-        assertEquals(mapper,"{\"headers\":{},\"body\":null,\"statusCodeValue\":200,\"statusCode\":\"OK\"}");
+
+        assertEquals(test.getStatusCode().toString(),"200 OK");
 
 
 
