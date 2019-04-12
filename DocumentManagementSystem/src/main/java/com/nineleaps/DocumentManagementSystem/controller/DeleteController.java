@@ -20,7 +20,7 @@ public class DeleteController {
     @PostMapping("v1/delete")
     public ResponseEntity<CustomResponse> deleteRequest(@RequestHeader("tokenId") String tokenData, @RequestParam String fileType,@RequestParam String userId) throws IOException, ParseException {
         System.out.println("DELETE:");
-        return deleteServiceImpl.deleteRecord(fileType,userId);
+            return deleteServiceImpl.deleteRecord(fileType,userId);
     }
 
 

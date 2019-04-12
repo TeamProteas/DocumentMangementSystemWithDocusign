@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 @SpringBootTest
-public class DocumentTypeServiceImplTest {
+public class    DocumentTypeServiceImplTest {
     @InjectMocks
     DocumentTypeServiceImpl documentTypeService;
 

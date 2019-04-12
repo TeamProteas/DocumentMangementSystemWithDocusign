@@ -16,7 +16,7 @@ import java.util.List;
 
 @CrossOrigin
 @Controller
-public class ViewController {
+public class    ViewController {
     @Autowired
     ViewServiceImpl viewServiceImpl;
 

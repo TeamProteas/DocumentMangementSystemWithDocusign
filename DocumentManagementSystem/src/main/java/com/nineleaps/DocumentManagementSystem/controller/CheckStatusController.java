@@ -9,7 +9,7 @@ import java.io.IOException;
 
 @CrossOrigin
 @RestController
-public class CheckStatusController {
+public class    CheckStatusController {
 
     @Autowired
     CheckStatusImpl checkStatusImpl;
