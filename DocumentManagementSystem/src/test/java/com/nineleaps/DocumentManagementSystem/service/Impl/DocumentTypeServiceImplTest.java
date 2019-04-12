@@ -1,4 +1,4 @@
-package com.nineleaps.DocumentManagementSystem.service;
+package com.nineleaps.DocumentManagementSystem.service.Impl;
 
 import com.nineleaps.DocumentManagementSystem.dao.DocumentType;
 import com.nineleaps.DocumentManagementSystem.repository.DocumentTypeRepository;

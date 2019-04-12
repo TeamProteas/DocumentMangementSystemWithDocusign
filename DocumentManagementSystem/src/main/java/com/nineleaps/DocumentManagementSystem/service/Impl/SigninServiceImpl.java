@@ -21,6 +21,8 @@ public class SigninServiceImpl implements SignInService {
     @Autowired
     TokenRequestedData tokenRequestedData;
 
+
+
     @Override
     public SigninResponseData authorizeUser() {
 //        System.out.println(tokenRequestedData.getGoogleId());
@@ -30,7 +32,6 @@ public class SigninServiceImpl implements SignInService {
         EmployeeAccounts data = employeeAccountRepo.findbyEmailId(tokenRequestedData.getUserEmail());
         employeeAccountRepo.updateGoogleId(tokenRequestedData.getGoogleId(), data.getUid());
 
-
         SigninResponseData signinResponseData = new SigninResponseData();
         signinResponseData.setEmailId(data.getEmailId());
         signinResponseData.setView(data.getDesignation());
@@ -38,7 +39,8 @@ public class SigninServiceImpl implements SignInService {
 
         //CREATING A FOLDER FOR THE LOGGED IN USER
         String uid = "/home/nineleaps/Desktop/UserData/" + data.getUid().toString();
-        new File(uid).mkdir();
+        File file = new File(uid);
+        file.mkdir();
 
 
         return signinResponseData;

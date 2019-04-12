@@ -32,5 +32,12 @@ public class SigninResponseData {
 
     private String view;
 
+    public SigninResponseData() {
+    }
 
+    public SigninResponseData(String emailId, String userId, String view) {
+        this.emailId = emailId;
+        this.userId = userId;
+        this.view = view;
+    }
 }

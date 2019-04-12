@@ -11,7 +11,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
@@ -20,8 +19,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.any;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
@@ -53,26 +51,28 @@ public class StatusTableServiceImplTest {
 
     @Test
     public void checkStatus() {
+        List<EmployeeData> employeeData = new ArrayList<>();
         when(employeeAccountsRepository.findbyGoogleId("107583232828339878102")).thenReturn(employeeAccounts);
         when(documentTypeRepository.count()).thenReturn(6l);
-        when(employeeDataRepository.findByfolderUid(employeeAccounts.getUid().toString()));
-        doNothing().when(employeeAccountsRepository).updateallUploaded(any(), employeeAccounts.getUid());
+//        when(employeeDataRepository.findByfolderUid("107583232828339878102")).thenReturn(employeeData);
+//        doNothing().when(employeeAccountsRepository).updateallUploaded(true, employeeAccounts.getUid());
         when(employeeDataRepository.findByfolderUidAndVerified(employeeAccounts.getUid().toString())).thenReturn(Stream
                 .of(new EmployeeData(UUID.fromString("c465dd21-deda-400b-a788-179025e31898"), "pancard",
                         "da0d1a7d-ac1e-47a0-bf45-c19ec50101aa", true, "mukul", "mukul",
                         32343243243242l), new EmployeeData(UUID.fromString("c465dd21-deda-400b-a788-179025e31898"), "pancard",
                         "da0d1a7d-ac1e-47a0-bf45-c19ec50101aa", true, "mukul", "mukul",
                         32343243243242l)).collect(Collectors.toList()));
-        doNothing().when(employeeAccountsRepository).updateallVerified(any(), employeeAccounts.getUid());
+//        doNothing().when(employeeAccountsRepository).updateallVerified(true, employeeAccounts.getUid());
 
         service.checkStatus("107583232828339878102");
+
     }
 
     @Test
     public void getTableData() {
         List<EmployeeData> employeeData = new ArrayList<>();
 
-        when(employeeDataRepository.findAll()).thenReturn(employeeData);
+//        when(employeeDataRepository.findAll()).thenReturn(employeeData);
         List<StatusTableData> statusTableData1 = service.getTableData();
         assertEquals(statusTableData1.size(),0);
 

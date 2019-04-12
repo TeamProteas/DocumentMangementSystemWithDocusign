@@ -8,6 +8,8 @@ import java.util.UUID;
 
 @Table("DigitalSignData")
 public class DigitalSignData {
+    public DigitalSignData() {
+    }
 
     @Id
     @Column("uid")
