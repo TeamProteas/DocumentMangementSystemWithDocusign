@@ -35,6 +35,7 @@ public class DownloadControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+
     @Before
     public void setup() {
 
@@ -56,10 +57,13 @@ public class DownloadControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.post("v1/download")
                 .accept(MediaType.ALL)
                 .contentType(MediaType.ALL)
-                .header("tokenId", "gkhgkkdjfsfhdflkshfdslhfskhfkdjsldljfhdflkjhfkdslfkh")
+
+                .header("tokenId", "abcde")
                 .param("fileType","pancard"));
 
-        ResponseEntity<Object> test=downloadController.DownloadFile("gkhgkkdjfsfhdflkshfdslhfskhfkdjsldljfhdflkjhfkdslfkh","pancard");
+
+
+        ResponseEntity<Object> test=downloadController.DownloadFile("abcde","pancard");
         String mapper=objectMapper.writeValueAsString(test);
         assertEquals(mapper,"{\"headers\":{},\"body\":null,\"statusCodeValue\":200,\"statusCode\":\"OK\"}");
 

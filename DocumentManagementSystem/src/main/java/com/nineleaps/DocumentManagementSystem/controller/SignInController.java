@@ -24,7 +24,8 @@ public class SignInController {
         System.out.println("SIGNIN:");
         return signServiceImpl.authorizeUser();
 
-}}
+    }
+}
 
 
 

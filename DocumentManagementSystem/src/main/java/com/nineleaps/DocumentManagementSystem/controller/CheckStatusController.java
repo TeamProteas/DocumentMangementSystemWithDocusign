@@ -14,9 +14,9 @@ public class    CheckStatusController {
     @Autowired
     CheckStatusImpl checkStatusImpl;
 
-    @RequestMapping("/v1/chkstatus")
+    @RequestMapping("/v1/checkstatus")
     public String status(@RequestHeader("tokenId") String tokenData, @RequestParam("name")String name, @RequestParam("documentname")String documentname) throws IOException, ParseException {
-        return checkStatusImpl.checkStatus(name,documentname);
+        return checkStatusImpl. checkStatus(name,documentname);
     }
 }
 

@@ -16,18 +16,7 @@ public class EmailNotificationController {
     @Autowired
     EmailNotificationImpl notificationImpl;
 
-    @RequestMapping("/v1/sendmail")
-    public String signUpSuccess(@RequestHeader("tokenId") String tokenId, @RequestBody EmailNotificationData emailNotificationData) {
 
-        //send a notification
-        try {
-            notificationImpl.sendNotification(emailNotificationData);
-            return "Successfully signed in";
-        } catch (MailException e) {
-            System.out.println(e.getMessage());
-            return "mail not sent";
-        }
-    }
 
     @RequestMapping("/v1/sendhtml")
     public String htmlMail(@RequestHeader("tokenId") String tokenId, @RequestBody EmailNotificationData emailNotificationData) {

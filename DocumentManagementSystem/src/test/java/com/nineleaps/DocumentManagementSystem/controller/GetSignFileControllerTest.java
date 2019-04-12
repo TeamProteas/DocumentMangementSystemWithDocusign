@@ -1,10 +1,8 @@
-
 package com.nineleaps.DocumentManagementSystem.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nineleaps.DocumentManagementSystem.dto.SigninResponseData;
 import com.nineleaps.DocumentManagementSystem.exceptions.CustomResponse;
-import com.nineleaps.DocumentManagementSystem.service.Impl.AddDocumentTypeServiceImpl;
+import com.nineleaps.DocumentManagementSystem.service.Impl.GetSignFileImpl;
+import okio.ByteString;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,26 +20,18 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
-public class AddDocumentTypeControllerTest {
-
+public class GetSignFileControllerTest {
     @InjectMocks
-    private AddDocumentTypeController addDocumentTypeController;
-
-    @Mock
-    AddDocumentTypeServiceImpl addDocumentTypeService;
-
-
+    GetSignFileController getSignFileController;
     @Autowired
-    private MockMvc mockMvc;
-
-
-    ObjectMapper objectMapper = new ObjectMapper();
+    MockMvc mockMvc;
+    @Mock
+    GetSignFileImpl getSignFileImpl;
 
     @Before
     public void setup() {
@@ -49,32 +39,24 @@ public class AddDocumentTypeControllerTest {
         MockitoAnnotations.initMocks(this);
 
         mockMvc = MockMvcBuilders
-                .standaloneSetup(addDocumentTypeController)
+                .standaloneSetup(getSignFileController)
 
                 .build();
     }
 
-
-
     @Test
-    public void getNewDoctype() throws Exception {
-        ResponseEntity<CustomResponse>  data =new ResponseEntity<CustomResponse>(HttpStatus.OK);
-
-        when(addDocumentTypeService.addDoctype("abcde", "pancard", "Pan Card")).thenReturn(data);
-
+    public void getFile() throws Exception {
+        ResponseEntity<CustomResponse> responseEntity=new ResponseEntity<CustomResponse>(HttpStatus.OK);
+        when(getSignFileImpl.getFile("mukul","pancard")).thenReturn(responseEntity);
 
 
-        mockMvc.perform(MockMvcRequestBuilders.post("v1/doctype/add")
+        mockMvc.perform(MockMvcRequestBuilders.post("v1/getfile")
                 .accept(MediaType.ALL)
                 .contentType(MediaType.ALL)
                 .header("tokenId", "abcde")
-                .param("fieldType", "pancard")
-                .param("displayName", "Pan Card"));
-
-        ResponseEntity<CustomResponse> responseEntity=addDocumentTypeService.addDoctype("abcde","pancard","Pan Card");
-
-        assertEquals(responseEntity.getStatusCode().toString(),"200 OK");
-
+                .param("name","mukul")
+                .param("documentname","pancard"));
+        ResponseEntity<CustomResponse> data =getSignFileController.getFile("abcde","mukul","pancard");
+        assertEquals(data.getStatusCode().toString(),"200 OK");
     }
 }
-
