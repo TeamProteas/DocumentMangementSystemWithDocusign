@@ -34,6 +34,7 @@ public class SignInControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+
     @Before
     public void setup() {
 
@@ -53,7 +54,7 @@ public class SignInControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.post("v1/signin")
                 .accept(MediaType.ALL)
                 .contentType(MediaType.ALL)
-                .header("tokenId", "gkhgkkdjfsfhdflkshfdslhfskhfkdjsldljfhdflkjhfkdslfkh"));
+                .header("tokenId", "abcde"));
 
         SigninResponseData test=signInController.signInRequest("");
         String mapper=objectMapper.writeValueAsString(test);

@@ -24,13 +24,6 @@ public class EmailNotificationImpl implements EmailNotificationService {
     @Autowired
     TemplateEngine templateEngine;
 
-    public void sendNotification(EmailNotificationData emailNotificationData) throws MailException {
-        SimpleMailMessage mail = new SimpleMailMessage();
-        mail.setTo(emailNotificationData.getEmailAddress());
-        mail.setSubject("new mail");
-        mail.setText("hello there");
-        javaMailSender.send(mail);
-    }
 
     public void sendHtmlMail(String To, String templateName, Context context) throws MessagingException {
         MimeMessage mail = javaMailSender.createMimeMessage();
