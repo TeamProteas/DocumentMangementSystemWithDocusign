@@ -40,7 +40,7 @@ public class AddDocumentTypeServiceImplTest {
 //        when(documentTypeRepository.save(documentType)).thenReturn(documentType);
 
 
-        ResponseEntity<CustomResponse> customResponseResponseEntity = addDocumentTypeService.addDoctype(anyString(), "aadharcard", "Aadhar Card");
+        ResponseEntity<CustomResponse> customResponseResponseEntity = addDocumentTypeService.addDoctype( "aadharcard", "Aadhar Card");
         assertEquals(customResponseResponseEntity.getStatusCode().getReasonPhrase(), "OK");
     }
 

@@ -43,37 +43,16 @@ public class AddDocumentTypeControllerTest {
 
     ObjectMapper objectMapper = new ObjectMapper();
 
-    @Before
-    public void setup() {
-
-        MockitoAnnotations.initMocks(this);
-
-        mockMvc = MockMvcBuilders
-                .standaloneSetup(addDocumentTypeController)
-
-                .build();
-    }
-
-
 
     @Test
     public void getNewDoctype() throws Exception {
-        ResponseEntity<CustomResponse>  data =new ResponseEntity<CustomResponse>(HttpStatus.OK);
+        ResponseEntity<CustomResponse> data = new ResponseEntity<CustomResponse>(HttpStatus.OK);
 
-        when(addDocumentTypeService.addDoctype("abcde", "pancard", "Pan Card")).thenReturn(data);
+        when(addDocumentTypeService.addDoctype("pancard", "Pan Card")).thenReturn(data);
 
 
-
-        mockMvc.perform(MockMvcRequestBuilders.post("v1/doctype/add")
-                .accept(MediaType.ALL)
-                .contentType(MediaType.ALL)
-                .header("tokenId", "abcde")
-                .param("fieldType", "pancard")
-                .param("displayName", "Pan Card"));
-
-        ResponseEntity<CustomResponse> responseEntity=addDocumentTypeService.addDoctype("abcde","pancard","Pan Card");
-
-        assertEquals(responseEntity.getStatusCode().toString(),"200 OK");
+        ResponseEntity<CustomResponse> responseEntity = addDocumentTypeController.getNewDoctype("abcde", "pancard", "Pan Card");
+        assertEquals(responseEntity.getStatusCode().toString(), "200 OK");
 
     }
 }

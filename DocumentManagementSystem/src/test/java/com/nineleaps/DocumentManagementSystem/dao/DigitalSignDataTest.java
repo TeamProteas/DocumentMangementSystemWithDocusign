@@ -31,9 +31,9 @@ public class DigitalSignDataTest {
         String test = objectMapper.writeValueAsString(digitalSignData);
         assertEquals(test, "{\"uid\":\"da0d1a7d-ac1e-47a0-bf45-c19ec50101aa\",\"filename\":\"jdshdfkj\",\"person\":\"kjsdkjdsh\",\"documentId\":\"abcde\",\"signatureRequestId\":\"dksdhd\",\"signedby\":\"kjdhkjfd\",\"documentName\":\"jdshkjdfshds\"}");
 
-        DigitalSignData digitalSignData1=new DigitalSignData(UUID.fromString("da0d1a7d-ac1e-47a0-bf45-c19ec50101aa"),"abc","abc","abc","abc","abc","abc");
-        String test1=objectMapper.writeValueAsString(digitalSignData1);
-        assertEquals(test1,"{\"uid\":\"da0d1a7d-ac1e-47a0-bf45-c19ec50101aa\",\"filename\":\"abc\",\"person\":\"abc\",\"documentId\":\"abc\",\"signatureRequestId\":\"abc\",\"signedby\":\"abc\",\"documentName\":\"abc\"}");
+        DigitalSignData digitalSignData1 = new DigitalSignData(UUID.fromString("da0d1a7d-ac1e-47a0-bf45-c19ec50101aa"), "abc", "abc", "abc", "abc", "abc", "abc");
+        String test1 = objectMapper.writeValueAsString(digitalSignData1);
+        assertEquals(test1, "{\"uid\":\"da0d1a7d-ac1e-47a0-bf45-c19ec50101aa\",\"filename\":\"abc\",\"person\":\"abc\",\"documentId\":\"abc\",\"signatureRequestId\":\"abc\",\"signedby\":\"abc\",\"documentName\":\"abc\"}");
 
     }
 
