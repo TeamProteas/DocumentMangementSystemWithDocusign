@@ -5,5 +5,5 @@ import org.springframework.http.ResponseEntity;
 
 public interface AddDocumentTypeService {
 
-    public ResponseEntity<CustomResponse> addDoctype(String tokenData, String fileType, String displayName);
+    public ResponseEntity<CustomResponse> addDoctype(String fileType, String displayName);
 }

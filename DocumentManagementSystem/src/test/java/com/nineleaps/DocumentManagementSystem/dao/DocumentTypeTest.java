@@ -24,6 +24,11 @@ public class DocumentTypeTest {
         documentType.setUid(UUID.fromString("0e53fab4-9daa-4817-ba38-34d45e61ada3"));
         String test=objectMapper.writeValueAsString(documentType);
         assertEquals(test,"{\"uid\":\"0e53fab4-9daa-4817-ba38-34d45e61ada3\",\"fileType\":\"aadharcard\",\"displayName\":\"Aadhar Card\"}");
+
+       DocumentType documentType1=new DocumentType(UUID.fromString("0e53fab4-9daa-4817-ba38-34d45e61ada3"),"abc","abc");
+       String test1=objectMapper.writeValueAsString(documentType1);
+       assertEquals(test1,"{\"uid\":\"0e53fab4-9daa-4817-ba38-34d45e61ada3\",\"fileType\":\"abc\",\"displayName\":\"abc\"}");
+
     }
 
 

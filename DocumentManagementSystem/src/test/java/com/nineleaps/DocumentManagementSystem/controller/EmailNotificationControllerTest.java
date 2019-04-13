@@ -20,8 +20,7 @@ import org.thymeleaf.context.Context;
 import javax.mail.MessagingException;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
@@ -53,8 +52,9 @@ public class EmailNotificationControllerTest {
     @Test
     public void htmlMail() throws Exception {
 
-//       doNothing().when(notificationImpl).sendHtmlMail("mukul.joshi@nineleaps.com","happy",null);
+       doThrow(MessagingException.class).when(notificationImpl).sendHtmlMail("mukul.joshi@nineleaps.com","happy",null);
 
+//        assertThrows(Exception exception, parser.getContent());
         mockMvc.perform(MockMvcRequestBuilders.post("v1/sendhtml")
                 .accept(MediaType.ALL)
                 .contentType(MediaType.ALL)
@@ -62,6 +62,7 @@ public class EmailNotificationControllerTest {
                 .content(String.valueOf(emailNotificationData)));
 
         emailNotificationController.htmlMail("abcde",emailNotificationData);
+
 
 
     }
