@@ -1,5 +1,6 @@
 package com.nineleaps.DocumentManagementSystem.controller;
 
+import com.nineleaps.DocumentManagementSystem.exceptions.ViewNoRecordsFound;
 import com.nineleaps.DocumentManagementSystem.service.Impl.DigitalSignImpl;
 import org.json.simple.parser.ParseException;
 import org.junit.Before;
@@ -20,8 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
@@ -36,16 +36,16 @@ public class DigitalSignControllerTest {
     @Mock
     DigitalSignImpl digitalSignImpl;
 
-    @Before
-    public void setup() {
-
-        MockitoAnnotations.initMocks(this);
-
-        mockMvc = MockMvcBuilders
-                .standaloneSetup(digitalSignController)
-
-                .build();
-    }
+//    @Before
+//    public void setup() {
+//
+//        MockitoAnnotations.initMocks(this);
+//
+//        mockMvc = MockMvcBuilders
+//                .standaloneSetup(digitalSignController)
+//
+//                .build();
+//    }
 
     @Mock
     MultipartFile multipartFile;
@@ -55,16 +55,17 @@ public class DigitalSignControllerTest {
 //        doNothing().when(digitalSignImpl).sendSignRequest("mukul.joshi@nineleaps.com", "anmol", "", multipartFile, "pancard");
 
 
-        mockMvc.perform(MockMvcRequestBuilders.post("v1/dsign")
-                .accept(MediaType.ALL)
-                .contentType(MediaType.ALL)
-                .header("tokenId", "abcde")
-                .param("signeeEmailId", "mukul.joshi@nineleaps.com")
-                .param("signeeName", "anmol")
-                .param("file", String.valueOf(multipartFile))
-                .param("documentName", "pancard"));
+//        mockMvc.perform(MockMvcRequestBuilders.post("v1/dsign")
+//                .accept(MediaType.ALL)
+//                .contentType(MediaType.ALL)
+//                .header("tokenId", "abcde")
+//                .param("signeeEmailId", "mukul.joshi@nineleaps.com")
+//                .param("signeeName", "anmol")
+//                .param("file", String.valueOf(multipartFile))
+//                .param("documentName", "pancard"));
 
         digitalSignController.digitalSign("mukul.joshi@nineleaps.com", "mukul.joshi@nineleaps.com", "anmol","mukul", multipartFile,"pancard");
+
 
 
     }
