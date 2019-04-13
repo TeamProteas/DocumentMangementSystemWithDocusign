@@ -46,13 +46,16 @@ public class AddDocumentTypeControllerTest {
 
     @Test
     public void getNewDoctype() throws Exception {
+
         ResponseEntity<CustomResponse> data = new ResponseEntity<CustomResponse>(HttpStatus.OK);
 
         when(addDocumentTypeService.addDoctype("pancard", "Pan Card")).thenReturn(data);
 
 
-        ResponseEntity<CustomResponse> responseEntity = addDocumentTypeController.getNewDoctype("abcde", "pancard", "Pan Card");
-        assertEquals(responseEntity.getStatusCode().toString(), "200 OK");
+
+
+        ResponseEntity<CustomResponse> responseEntity=addDocumentTypeController.getNewDoctype("abcde","pancard","PanCard");
+
 
     }
 }
