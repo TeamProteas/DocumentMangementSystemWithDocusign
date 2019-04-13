@@ -60,7 +60,7 @@ public class AddDocumentTypeControllerTest {
     public void getNewDoctype() throws Exception {
         ResponseEntity<CustomResponse>  data =new ResponseEntity<CustomResponse>(HttpStatus.OK);
 
-        when(addDocumentTypeService.addDoctype("abcde", "pancard", "Pan Card")).thenReturn(data);
+        when(addDocumentTypeService.addDoctype("abcde", "pancard", "PanCard")).thenReturn(data);
 
 
 
@@ -69,9 +69,9 @@ public class AddDocumentTypeControllerTest {
                 .contentType(MediaType.ALL)
                 .header("tokenId", "abcde")
                 .param("fieldType", "pancard")
-                .param("displayName", "Pan Card"));
+                .param("displayName", "PanCard"));
 
-        ResponseEntity<CustomResponse> responseEntity=addDocumentTypeService.addDoctype("abcde","pancard","Pan Card");
+        ResponseEntity<CustomResponse> responseEntity=addDocumentTypeController.getNewDoctype("abcde","pancard","PanCard");
 
         assertEquals(responseEntity.getStatusCode().toString(),"200 OK");
 

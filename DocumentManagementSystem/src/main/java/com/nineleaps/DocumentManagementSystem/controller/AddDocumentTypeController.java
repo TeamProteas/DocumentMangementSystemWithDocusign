@@ -18,7 +18,7 @@ public class AddDocumentTypeController {
 
 @PostMapping("v1/doctype/add")
 public ResponseEntity<CustomResponse> getNewDoctype(@RequestHeader("tokenId") String tokenData, @RequestParam("fieldType") String fileType, @RequestParam("displayName") String displayName){
-    return addDocumentTypeService.addDoctype(null,fileType,displayName);
+    return addDocumentTypeService.addDoctype(tokenData,fileType,displayName);
 
 
 

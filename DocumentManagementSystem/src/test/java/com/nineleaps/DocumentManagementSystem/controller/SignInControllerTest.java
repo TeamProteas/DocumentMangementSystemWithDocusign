@@ -1,8 +1,8 @@
 package com.nineleaps.DocumentManagementSystem.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nineleaps.DocumentManagementSystem.exceptions.CustomResponse;
-import com.nineleaps.DocumentManagementSystem.service.Impl.DeleteServiceImpl;
+import com.nineleaps.DocumentManagementSystem.dto.SigninResponseData;
+import com.nineleaps.DocumentManagementSystem.service.Impl.SigninServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,9 +12,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -24,16 +22,15 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
-public class DeleteControllerTest {
-
+public class SignInControllerTest {
     @InjectMocks
-    DeleteController deleteController;
-
-    @Mock
-    DeleteServiceImpl deleteService;
+    SignInController signInController;
 
     @Autowired
     private MockMvc mockMvc;
+
+    @Mock
+    SigninServiceImpl signinService;
 
     @Before
     public void setup() {
@@ -41,33 +38,28 @@ public class DeleteControllerTest {
         MockitoAnnotations.initMocks(this);
 
         mockMvc = MockMvcBuilders
-                .standaloneSetup(deleteController)
+                .standaloneSetup(signInController)
 
                 .build();
     }
 
-
     @Test
-    public void deleteRequest() throws Exception {
+    public void signInRequest() throws Exception {
+        ObjectMapper objectMapper=new ObjectMapper();
 
-        ResponseEntity<CustomResponse> entity=new ResponseEntity<CustomResponse>(HttpStatus.OK);
-        when(deleteService.deleteRecord("pancard","107583232828339878102")).thenReturn(entity);
+        SigninResponseData entity=new SigninResponseData("siddhantsharma@gmail.com","108887776","fhdfh");
+        when(signinService.authorizeUser()).thenReturn(entity);
 
         mockMvc.perform(MockMvcRequestBuilders.post("v1/delete")
                 .accept(MediaType.ALL)
                 .contentType(MediaType.ALL)
-                .header("tokenId", "abcde")
-                .param("fileType","pancard")
-                .param("userId","107583232828339878102"));
-        ResponseEntity<CustomResponse> test=deleteController.deleteRequest("","pancard","107583232828339878102");
-
-        assertEquals(test.getStatusCodeValue(),entity.getStatusCodeValue());
+                .header("tokenId", "abcde"));
 
 
+        SigninResponseData test=signInController.signInRequest("abcde");
+        String mapper=objectMapper.writeValueAsString(test);
 
-
-
-
+        assertEquals(mapper,"{\"emailId\":\"siddhantsharma@gmail.com\",\"userId\":\"108887776\",\"view\":\"fhdfh\"}");
 
     }
 }
