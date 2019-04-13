@@ -25,6 +25,9 @@ public class StatusTableDataTest {
         String test=objectMapper.writeValueAsString(statusTableData);
         assertEquals(test,"{\"emailId\":\"3234324324324\",\"employeeId\":\"NLI-124\",\"allVerified\":true,\"allUploaded\":true,\"firstName\":\"mukul\",\"lastName\":\"joshi\"}");
 
+        StatusTableData statusTableData1=new StatusTableData("ammy@gmail.com","NLI-124",true,true,"mukul","joshi");
+        String test1=objectMapper.writeValueAsString(statusTableData1);
+        assertEquals(test1,"{\"emailId\":\"ammy@gmail.com\",\"employeeId\":\"NLI-124\",\"allVerified\":true,\"allUploaded\":true,\"firstName\":\"mukul\",\"lastName\":\"joshi\"}");
 
     }
 

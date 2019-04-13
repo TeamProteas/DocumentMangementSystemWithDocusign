@@ -29,6 +29,9 @@ public class EmployeeDataTest {
         String test=objectMapper.writeValueAsString(employeeData);
         assertEquals(test,"{\"uid\":\"da0d1a7d-ac1e-47a0-bf45-c19ec50101aa\",\"fileType\":\"aadharcard\",\"folderUid\":\"da0d1a7d-ac1e-47a0-bf45-c19ec50101aa\",\"verifiedStatus\":true,\"orignalName\":\"mukul joshi\",\"uploadedBy\":\"anmol taneja\",\"uploadTime\":1232321313}");
 
+        EmployeeData employeeData1=new EmployeeData(UUID.fromString("7655c362-0e11-4f44-ae48-33ecf024cdfc"),"abc","abc",true,"abc","abc",12l);
+        String test1=objectMapper.writeValueAsString(employeeData1);
+        assertEquals(test1,"{\"uid\":\"7655c362-0e11-4f44-ae48-33ecf024cdfc\",\"fileType\":\"abc\",\"folderUid\":\"abc\",\"verifiedStatus\":true,\"orignalName\":\"abc\",\"uploadedBy\":\"abc\",\"uploadTime\":12}");
     }
 
 }

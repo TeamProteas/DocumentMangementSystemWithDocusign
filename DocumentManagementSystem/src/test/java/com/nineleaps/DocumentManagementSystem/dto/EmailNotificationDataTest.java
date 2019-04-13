@@ -21,8 +21,9 @@ public class EmailNotificationDataTest {
         emailNotificationData.setDescription("OfferLetter");
         emailNotificationData.getEmailAddress();
         emailNotificationData.setName("mukul");
+        emailNotificationData.setEmailAddress("ammy@gmail.com");
         String test=objectMapper.writeValueAsString(emailNotificationData);
-        assertEquals(test,"{\"emailAddress\":null,\"name\":\"mukul\",\"description\":\"OfferLetter\"}");
+        assertEquals(test,"{\"emailAddress\":ammy@gmail.com,\"name\":\"mukul\",\"description\":\"OfferLetter\"}");
 
     }
 

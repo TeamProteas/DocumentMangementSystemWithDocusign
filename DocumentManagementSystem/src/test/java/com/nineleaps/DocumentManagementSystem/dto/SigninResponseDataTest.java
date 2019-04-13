@@ -24,5 +24,8 @@ public class SigninResponseDataTest {
         String test=objectMapper.writeValueAsString(signinResponseData);
         assertEquals(test,"{\"emailId\":\"mukul.joshi@nineleaps.com\",\"userId\":\"12321323233233\",\"view\":\"Intern\"}");
 
+        SigninResponseData signinResponseData1=new SigninResponseData("ammy@gmail.com","12321323233233","Intern");
+        String test1=objectMapper.writeValueAsString(signinResponseData1);
+        assertEquals(test1,"{\"emailId\":\"ammy@gmail.com\",\"userId\":\"12321323233233\",\"view\":\"Intern\"}");
     }
 }

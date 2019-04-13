@@ -24,10 +24,8 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @Component
-@Service
 public class DocumentManagementInterceptor extends HandlerInterceptorAdapter {
 
     @Autowired
@@ -37,6 +35,7 @@ public class DocumentManagementInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object handler) throws Exception {
+        res.setHeader("Access-Control-Allow-Origin", "*"); res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS,PUT, HEAD, DELETE"); res.setHeader("Access-Control-Max-Age", "3600"); res.setHeader("Access-Control-Allow-Headers", "Content-Type"); res.setHeader("Access-Control-Allow-Credentials", "true");
         String fileType = req.getParameter("fileType");
         String userId = req.getParameter("userId");
         String tokenId = req.getHeader("tokenId");

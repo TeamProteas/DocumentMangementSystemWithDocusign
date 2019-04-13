@@ -19,7 +19,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -46,15 +46,16 @@ public class DocumentTypeControllerTest {
 
     @Test
     public void getTypes() throws Exception {
-        List<DocumentType> documentTypes=new ArrayList<DocumentType>();
+        List<DocumentType> documentTypes = new ArrayList<DocumentType>();
         when(documentTypeServiceImpl.fetchTypeOfDocument()).thenReturn(documentTypes);
 
 
         mockMvc.perform(MockMvcRequestBuilders.post("v1/dsign")
                 .accept(MediaType.ALL)
+                .header("tokenId", "abcde")
                 .contentType(MediaType.ALL));
-        List<DocumentType> data=documentTypeController.getTypes();
-        assertEquals(data.size(),0);
+        List<DocumentType> data = documentTypeController.getTypes("abcde");
+        assertEquals(data.size(), 0);
 
 
     }
