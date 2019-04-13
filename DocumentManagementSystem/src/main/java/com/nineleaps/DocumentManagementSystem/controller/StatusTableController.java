@@ -15,7 +15,7 @@ public class StatusTableController {
     @Autowired
     StatusTableServiceImpl statusTableService;
 
-    @GetMapping("v1/table")
+    @GetMapping("/v1/table")
     @ResponseBody
     public List<StatusTableData> getstatus(@RequestHeader("tokenId") String tokendata) {
         System.out.println("StatusTable");

@@ -1,8 +1,10 @@
 package com.nineleaps.DocumentManagementSystem.dao;
 
 import org.springframework.data.annotation.Id;
+
 import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.Table;
+
 
 import java.util.UUID;
 

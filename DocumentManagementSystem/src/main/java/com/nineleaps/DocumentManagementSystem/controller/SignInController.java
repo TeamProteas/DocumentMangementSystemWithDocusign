@@ -11,17 +11,19 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 
 
-@CrossOrigin
 @Controller
+@CrossOrigin
 public class SignInController {
     @Autowired
     SigninServiceImpl signServiceImpl;
 
 
     @ResponseBody
-    @PostMapping("/v1/signin")
+    @CrossOrigin
+    @GetMapping("/v1/signin")
     public SigninResponseData signInRequest(@RequestHeader(value = "tokenId") String tokenData) throws IOException, ParseException {
         System.out.println("SIGNIN:");
+        System.out.println(tokenData);
         return signServiceImpl.authorizeUser();
 
     }

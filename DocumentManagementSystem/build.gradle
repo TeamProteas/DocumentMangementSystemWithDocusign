@@ -16,7 +16,7 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-	compile('org.springframework.security.oauth:spring-security-oauth2')
+	//compile('org.springframework.security.oauth:spring-security-oauth2')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	implementation 'org.springframework.boot:spring-boot-starter-data-cassandra'
 
@@ -27,14 +27,8 @@ dependencies {
 
 
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	compile 'com.signaturit.api:java-sdk:1.1.6'
-	compile 'org.hibernate.validator:hibernate-validator-parent:6.0.14.Final'
-	compile 'org.hibernate.validator:hibernate-validator:6.0.14.Final'
-	// https://mvnrepository.com/artifact/javax.interceptor/javax.interceptor-api
-	compile group: 'javax.interceptor', name: 'javax.interceptor-api', version: '1.2-b06'
 	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
 	compile group: 'com.github.vanroy', name: 'spring-boot-starter-data-jest', version: '2.2.0.RELEASE'
 
