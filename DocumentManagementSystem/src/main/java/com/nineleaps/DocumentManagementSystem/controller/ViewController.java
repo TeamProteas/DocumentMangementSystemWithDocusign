@@ -22,7 +22,7 @@ public class    ViewController {
 
     @ResponseBody
     @GetMapping("v1/view")
-    public List<EmployeeData> getView(@RequestHeader(value = "tokenId") String tokenData) throws IOException, ParseException {
+    public List<EmployeeData> getView() throws IOException, ParseException {
         System.out.println("VIEW:");
         return viewServiceImpl.fetchViewData();
     }

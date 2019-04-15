@@ -20,7 +20,7 @@ public class DocumentTypeController {
 
     @ResponseBody
     @GetMapping("v1/doctype")
-    public List<DocumentType> getTypes(@RequestHeader("tokenId")String tokendata) {
+    public List<DocumentType> getTypes() {
         System.out.println("DOCUMENTTYPE:");
         return documentTypeServiceImpl.fetchTypeOfDocument();
     }

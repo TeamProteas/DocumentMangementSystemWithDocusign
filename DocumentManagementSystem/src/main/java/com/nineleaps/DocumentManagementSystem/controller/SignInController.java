@@ -21,9 +21,9 @@ public class SignInController {
     @ResponseBody
     @CrossOrigin
     @GetMapping("/v1/signin")
-    public SigninResponseData signInRequest(@RequestHeader(value = "tokenId") String tokenData) throws IOException, ParseException {
+    public SigninResponseData signInRequest() throws IOException, ParseException {
         System.out.println("SIGNIN:");
-        System.out.println(tokenData);
+        //System.out.println(tokenData);
         return signServiceImpl.authorizeUser();
 
     }

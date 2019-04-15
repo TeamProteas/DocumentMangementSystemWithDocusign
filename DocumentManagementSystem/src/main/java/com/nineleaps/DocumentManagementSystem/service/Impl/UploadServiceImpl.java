@@ -37,7 +37,7 @@ public class UploadServiceImpl implements UploadService {
 
 
     @Override
-    public ResponseEntity<CustomResponse> storeData(String tokenData, MultipartFile multipartFile, String fileType,String userId) throws IOException, ParseException {
+    public ResponseEntity<CustomResponse> storeData(MultipartFile multipartFile, String fileType,String userId) throws IOException, ParseException {
 
         if (fileType.equals(null)) {
             throw new FileTypeEmpty("file type does not have any value");

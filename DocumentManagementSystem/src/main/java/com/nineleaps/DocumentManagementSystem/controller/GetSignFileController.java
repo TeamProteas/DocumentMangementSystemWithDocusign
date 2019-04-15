@@ -17,7 +17,7 @@ public class GetSignFileController {
     GetSignFileImpl getSignFileImpl;
 
     @RequestMapping("/v1/getFile")
-    public ResponseEntity<CustomResponse> getFile(@RequestHeader("tokenId") String tokenData, @RequestParam("name") String name, @RequestParam("documentname") String documentname) throws IOException {
+    public ResponseEntity<CustomResponse> getFile(@RequestParam("name") String name, @RequestParam("documentname") String documentname) throws IOException {
         return getSignFileImpl.getFile(name, documentname);
 
     }

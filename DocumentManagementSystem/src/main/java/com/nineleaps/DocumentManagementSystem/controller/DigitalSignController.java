@@ -19,6 +19,7 @@ public class DigitalSignController {
 
     @PostMapping("/v1/dsign")
     public void digitalSign(@RequestHeader("tokenId")String tokenData,@RequestParam("signeeEmailId") String signeeEmailId, @RequestParam("signeeName") String signeeName, @RequestParam("name") String name, @RequestParam("file") MultipartFile file, @RequestParam("documentName") String documentName) throws NullPointerException, IOException, ParseException {
+
         digitalSignImpl.sendSignRequest(signeeEmailId, signeeName, name, file, documentName);
     }
 }

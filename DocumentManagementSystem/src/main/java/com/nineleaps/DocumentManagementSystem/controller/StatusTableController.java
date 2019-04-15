@@ -17,7 +17,7 @@ public class StatusTableController {
 
     @GetMapping("/v1/table")
     @ResponseBody
-    public List<StatusTableData> getstatus(@RequestHeader("tokenId") String tokendata) {
+    public List<StatusTableData> getstatus() {
         System.out.println("StatusTable");
         return statusTableService.getTableData();
 

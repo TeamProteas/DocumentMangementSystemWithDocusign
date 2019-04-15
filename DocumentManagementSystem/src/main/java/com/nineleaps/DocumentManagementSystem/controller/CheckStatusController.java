@@ -15,7 +15,7 @@ public class    CheckStatusController {
     CheckStatusImpl checkStatusImpl;
 
     @RequestMapping("/v1/checkstatus")
-    public String status(@RequestHeader("tokenId") String tokenData, @RequestParam("name")String name, @RequestParam("documentname")String documentname) throws IOException, ParseException {
+    public String status(@RequestParam("name")String name, @RequestParam("documentname")String documentname) throws IOException, ParseException {
         return checkStatusImpl. checkStatus(name,documentname);
     }
 }

@@ -35,7 +35,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(authorizationInterceptor()).addPathPatterns("/v1/signin").addPathPatterns("/v1/doctype");
+        registry.addInterceptor(authorizationInterceptor()).addPathPatterns("/**");
 
 
     }

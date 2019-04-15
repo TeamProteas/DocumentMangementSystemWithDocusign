@@ -19,7 +19,7 @@ public class EmailNotificationController {
 
 
     @RequestMapping("/v1/sendhtml")
-    public String htmlMail(@RequestHeader("tokenId") String tokenId, @RequestBody EmailNotificationData emailNotificationData) {
+    public String htmlMail(@RequestBody EmailNotificationData emailNotificationData) {
         Context context = new Context();
         context.setVariable("title", "REMINDER MAIL");
         context.setVariable("name", emailNotificationData.getName());

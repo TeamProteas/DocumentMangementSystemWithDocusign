@@ -39,11 +39,12 @@ public class DocumentManagementInterceptor extends HandlerInterceptorAdapter {
         String fileType = req.getParameter("fileType");
         String userId = req.getParameter("userId");
         String tokenId = req.getHeader("tokenId");
+        String temp=req.getParameter("login");
         System.out.println(req.getRequestURI());
         System.out.println("TOKENID " + req.getHeader("tokenId"));
 
         CloseableHttpClient client = HttpClients.createDefault();
-        HttpGet request = new HttpGet("https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + tokenId);
+        HttpGet request = new HttpGet("https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + temp);
         CloseableHttpResponse response = null;
         response = client.execute(request);
         int status = response.getStatusLine().getStatusCode();

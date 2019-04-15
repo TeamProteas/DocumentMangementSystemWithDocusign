@@ -17,7 +17,7 @@ public class ElasticSearchController {
 
     @ResponseBody
     @GetMapping(value = "v1/search")
-    public List<ElasticSearchData> getAll(@RequestHeader("tokenId") String tokenData, @RequestParam("text")  String text) {
+    public List<ElasticSearchData> getAll(@RequestParam("text")  String text) {
         System.out.println(text);
         return elasticSearchQueryBuilder.getAll(text);
     }
