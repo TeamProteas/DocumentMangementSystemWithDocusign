@@ -1,5 +1,6 @@
 package com.nineleaps.DocumentManagementSystem.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nineleaps.DocumentManagementSystem.dao.DocumentType;
 import com.nineleaps.DocumentManagementSystem.service.Impl.DocumentTypeServiceImpl;
 import org.junit.Before;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -46,16 +48,16 @@ public class DocumentTypeControllerTest {
 
     @Test
     public void getTypes() throws Exception {
+
         List<DocumentType> documentTypes = new ArrayList<DocumentType>();
         when(documentTypeServiceImpl.fetchTypeOfDocument()).thenReturn(documentTypes);
 
 
-        mockMvc.perform(MockMvcRequestBuilders.post("v1/dsign")
-                .accept(MediaType.ALL)
-                .header("tokenId", "abcde")
-                .contentType(MediaType.ALL));
-        List<DocumentType> data = documentTypeController.getTypes("abcde");
-        assertEquals(data.size(), 0);
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/v1/doctype")
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+        assertEquals(mvcResult.getResponse().getContentAsString(),"[]");
+        assertEquals(mvcResult.getResponse().getStatus(), 200);
 
 
     }

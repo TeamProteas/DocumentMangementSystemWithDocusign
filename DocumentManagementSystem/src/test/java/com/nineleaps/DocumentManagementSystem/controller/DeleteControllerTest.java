@@ -51,29 +51,17 @@ public class DeleteControllerTest {
     @Test
     public void deleteRequest() throws Exception {
 
-        ResponseEntity<CustomResponse> entity=new ResponseEntity<CustomResponse>(HttpStatus.OK);
-        when(deleteService.deleteRecord("pancard","107583232828339878102")).thenReturn(entity);
+        ResponseEntity<CustomResponse> entity = new ResponseEntity<CustomResponse>(HttpStatus.OK);
+        when(deleteService.deleteRecord("pancard", "107583232828339878102")).thenReturn(entity);
 
-      MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("v1/delete")
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/v1/delete")
                 .accept(MediaType.ALL)
                 .contentType(MediaType.ALL)
                 .header("tokenId", "abcde")
-                .param("fileType","pancard")
-                .param("userId","107583232828339878102")).andReturn();
+                .param("fileType", "pancard")
+                .param("userId", "107583232828339878102")).andReturn();
 
-      String content = mvcResult.getResponse().getContentAsString();
-      int status=mvcResult.getResponse().getStatus();
-      assertEquals(200,status);
-
-      assertEquals(content,"OK");
-
-       // ResponseEntity<CustomResponse> test=deleteController.deleteRequest("","pancard","107583232828339878102");
-
-        //assertEquals(test.getStatusCodeValue(),entity.getStatusCodeValue());
-
-
-
-
+        assertEquals(mvcResult.getResponse().getStatus(),200);
 
 
 

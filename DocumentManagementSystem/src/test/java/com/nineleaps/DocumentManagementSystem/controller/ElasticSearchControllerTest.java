@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -49,14 +50,12 @@ public class ElasticSearchControllerTest {
         List<ElasticSearchData> elasticSearchData = new ArrayList<ElasticSearchData>();
         when(elasticSearchQueryBuilder.getAll("muk")).thenReturn(elasticSearchData);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("v1/search")
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/v1/search")
                 .accept(MediaType.ALL)
                 .contentType(MediaType.ALL)
-                .header("tokenId", "abcde")
-                .param("text", "muk"));
-        List<ElasticSearchData> test=elasticSearchController.getAll("abcde","muk");
-        assertEquals(test.size(),0);
-
+                .param("text", "muk")).andReturn();
+        assertEquals(mvcResult.getResponse().getStatus(), 200);
+        assertEquals(mvcResult.getResponse().getContentAsString(), "[]");
     }
 
 }
