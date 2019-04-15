@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -53,15 +54,22 @@ public class DeleteControllerTest {
         ResponseEntity<CustomResponse> entity=new ResponseEntity<CustomResponse>(HttpStatus.OK);
         when(deleteService.deleteRecord("pancard","107583232828339878102")).thenReturn(entity);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("v1/delete")
+      MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("v1/delete")
                 .accept(MediaType.ALL)
                 .contentType(MediaType.ALL)
                 .header("tokenId", "abcde")
                 .param("fileType","pancard")
-                .param("userId","107583232828339878102"));
-        ResponseEntity<CustomResponse> test=deleteController.deleteRequest("","pancard","107583232828339878102");
+                .param("userId","107583232828339878102")).andReturn();
 
-        assertEquals(test.getStatusCodeValue(),entity.getStatusCodeValue());
+      String content = mvcResult.getResponse().getContentAsString();
+      int status=mvcResult.getResponse().getStatus();
+      assertEquals(200,status);
+
+      assertEquals(content,"OK");
+
+       // ResponseEntity<CustomResponse> test=deleteController.deleteRequest("","pancard","107583232828339878102");
+
+        //assertEquals(test.getStatusCodeValue(),entity.getStatusCodeValue());
 
 
 

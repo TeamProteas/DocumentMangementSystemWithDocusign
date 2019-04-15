@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class AddDocumentTypeController {
@@ -16,13 +15,13 @@ public class AddDocumentTypeController {
     AddDocumentTypeServiceImpl addDocumentTypeService;
 
 
-@PostMapping("v1/doctype/add")
-public ResponseEntity<CustomResponse> getNewDoctype(@RequestParam("fieldType") String fileType, @RequestParam("displayName") String displayName) {
+    @PostMapping("/v1/doctype/add")
+    public ResponseEntity<CustomResponse> getNewDoctype( @RequestParam("fileType") String fileType, @RequestParam("displayName") String displayName) {
 
-    return addDocumentTypeService.addDoctype(fileType, displayName);
+        return addDocumentTypeService.addDoctype(fileType, displayName);
 
 
-}
+    }
 
 
 }

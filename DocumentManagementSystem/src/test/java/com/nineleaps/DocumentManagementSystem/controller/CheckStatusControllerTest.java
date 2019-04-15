@@ -13,13 +13,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.io.IOException;
 
+import static javax.swing.text.html.HTML.Tag.HEAD;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
+import static sun.rmi.transport.TransportConstants.Return;
 
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
@@ -31,6 +35,10 @@ public class CheckStatusControllerTest {
     CheckStatusImpl checkStatusImpl;
     @Autowired
     MockMvc mockMvc;
+
+
+    @Autowired
+    private WebApplicationContext context;
     @Before
     public void setup() {
 
@@ -44,25 +52,42 @@ public class CheckStatusControllerTest {
     @Test
     public void status() throws Exception {
 
-        when(checkStatusImpl.checkStatus("mukul","pancard")).thenReturn("Signed");
+        when(checkStatusImpl.checkStatus("mukul", "pancard")).thenReturn("Signed");
 
 
-        mockMvc.perform(MockMvcRequestBuilders.post("v1/checkstatus")
+
+      MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/v1/checkstatus")
                 .accept(MediaType.ALL)
-                .contentType(MediaType.ALL)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+
                 .header("tokenId", "abcde")
                 .param("name", "mukul")
-                .param("documentname", "pancard"));
-
-
-        String test=checkStatusController.status("abcde","mukul","pancard");
-        assertEquals(test,"Signed");
+                .param("documentname", "pancard")
 
 
 
+      ).andReturn();
+        String content = mvcResult.getResponse().getContentAsString();
+       int status = mvcResult.getResponse().getStatus();
+       assertEquals(200,status);
 
 
 
+
+       assertEquals(content,"Signed");
+
+
+        //String test=checkStatusController.status("abcde","mukul","pancard");
+        //assertEquals(test,"Signed");
+
+
+
+
+
+
+
+//        String test = checkStatusController.status("abcde", "mukul", "pancard");
+//        assertEquals(test, "Signed");
 
 
     }

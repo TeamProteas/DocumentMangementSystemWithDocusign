@@ -3,10 +3,16 @@ package com.nineleaps.DocumentManagementSystem.exceptions;
 import java.util.Date;
 
 public class CustomResponse {
+
+
+    private String httpCodeMessage;
     private Date timestamp;
     private String message;
     private String details;
-    private String httpCodeMessage;
+
+
+    public CustomResponse() {
+    }
 
     public Date getTimestamp() {
         return timestamp;
@@ -30,17 +36,20 @@ public class CustomResponse {
 
     public CustomResponse(Date timestamp, String message, String details, String httpCodeMessage) {
         super();
-        this.timestamp=timestamp;
+        this.timestamp = timestamp;
         this.message = message;
         this.details = details;
-        this.httpCodeMessage=httpCodeMessage;
+        this.httpCodeMessage = httpCodeMessage;
     }
+
     public String getHttpCodeMessage() {
         return httpCodeMessage;
     }
+
     public String getMessage() {
         return message;
     }
+
     public String getDetails() {
         return details;
     }

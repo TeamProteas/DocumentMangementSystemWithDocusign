@@ -17,8 +17,10 @@ public class DeleteController {
     DeleteServiceImpl deleteServiceImpl;
 
     @ResponseBody
-    @PostMapping("v1/delete")
-    public ResponseEntity<CustomResponse> deleteRequest(@RequestParam String fileType,@RequestParam String userId) throws IOException, ParseException {
+
+    @PostMapping("/v1/delete")
+    public ResponseEntity<CustomResponse> deleteRequest( @RequestParam String fileType,@RequestParam String userId) throws IOException, ParseException {
+
         System.out.println("DELETE:");
             return deleteServiceImpl.deleteRecord(fileType,userId);
     }

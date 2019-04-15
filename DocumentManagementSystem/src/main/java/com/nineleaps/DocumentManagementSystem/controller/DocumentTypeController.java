@@ -19,7 +19,8 @@ public class DocumentTypeController {
     DocumentTypeServiceImpl documentTypeServiceImpl;
 
     @ResponseBody
-    @GetMapping("v1/doctype")
+
+    @GetMapping("/v1/doctype")
     public List<DocumentType> getTypes() {
         System.out.println("DOCUMENTTYPE:");
         return documentTypeServiceImpl.fetchTypeOfDocument();
