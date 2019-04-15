@@ -24,17 +24,25 @@ public class EmailNotificationImpl implements EmailNotificationService {
     @Autowired
     TemplateEngine templateEngine;
 
+    public String sendHtmlMail(String To, String templateName,String name,String description) throws MessagingException ,MailException{
+        //set context
+        Context context = new Context();
+        context.setVariable("title", "REMINDER MAIL");
+        context.setVariable("name", name);
+        context.setVariable("description",description );
 
-    public void sendHtmlMail(String To, String templateName, Context context) throws MessagingException {
-        MimeMessage mail = javaMailSender.createMimeMessage();
+        //process html template
         String body = templateEngine.process(templateName, context);
+
+        // sending mail
+        MimeMessage mail = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mail, true);
         helper.setTo(To);
         helper.setSubject("html mail");
         helper.setText(body, true);
         javaMailSender.send(mail);
 
-
+        return " template mail sent";
     }
 
 }
