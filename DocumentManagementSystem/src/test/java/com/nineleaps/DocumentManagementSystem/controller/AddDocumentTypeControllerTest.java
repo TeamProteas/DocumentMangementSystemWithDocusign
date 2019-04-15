@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -36,25 +37,31 @@ public class AddDocumentTypeControllerTest {
     @Mock
     AddDocumentTypeServiceImpl addDocumentTypeService;
 
-
     @Autowired
-    private MockMvc mockMvc;
+    MockMvc mockMvc;
 
+    @Before
+    public void setup() {
 
-    ObjectMapper objectMapper = new ObjectMapper();
+        MockitoAnnotations.initMocks(this);
+        mockMvc = MockMvcBuilders
+                .standaloneSetup(addDocumentTypeController)
+                .build();
+    }
 
 
     @Test
     public void getNewDoctype() throws Exception {
 
-        ResponseEntity<CustomResponse> data = new ResponseEntity<CustomResponse>(HttpStatus.OK);
 
-        when(addDocumentTypeService.addDoctype("pancard", "Pan Card")).thenReturn(data);
-
-
-
-
-        ResponseEntity<CustomResponse> responseEntity=addDocumentTypeController.getNewDoctype("abcde","pancard","PanCard");
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/v1/doctype/add")
+                .accept(MediaType.ALL)
+                .contentType(MediaType.ALL)
+                .header("tokenId", "abcde")
+                .param("fileType", "pancard")
+                .param("displayName", "mukul")
+        ).andReturn();
+        String respon=mvcResult.getResponse().getContentAsString();
 
 
     }

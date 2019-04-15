@@ -16,7 +16,7 @@ public class VerifyController {
     VerifyServiceImpl verifyService;
 
     @ResponseBody
-    @PostMapping("v1/verify/status")
+    @PostMapping("/v1/verify/status")
     public ResponseEntity<CustomResponse> verifierStatus(@RequestParam("userId") String userId, @RequestParam("fileType") String fileType) {
         return  verifyService.changeVerifyStatus(userId, fileType);
 

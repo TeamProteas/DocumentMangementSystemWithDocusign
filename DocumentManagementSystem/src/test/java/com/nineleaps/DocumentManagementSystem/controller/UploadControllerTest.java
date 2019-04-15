@@ -66,7 +66,7 @@ public class UploadControllerTest {
                 .header("tokenId", "abcde")
                 .param("multipartfile", String.valueOf(multipart))
                 .param("fileType", "pancard")
-                .param("userId", "107583232828339878102"));
+                .param("userId", "107583232828339878102")).andReturn();
 
         ResponseEntity<CustomResponse> test = uploadController.fetchData("abcde", multipart, "pancard", "107583232828339878102");
         assertEquals(test.getStatusCode().toString(), "200 OK");

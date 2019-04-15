@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -31,6 +32,7 @@ public class CheckStatusControllerTest {
     CheckStatusImpl checkStatusImpl;
     @Autowired
     MockMvc mockMvc;
+
     @Before
     public void setup() {
 
@@ -44,25 +46,23 @@ public class CheckStatusControllerTest {
     @Test
     public void status() throws Exception {
 
-        when(checkStatusImpl.checkStatus("mukul","pancard")).thenReturn("Signed");
+        when(checkStatusImpl.checkStatus("mukul", "pancard")).thenReturn("Signed");
 
 
-        mockMvc.perform(MockMvcRequestBuilders.post("v1/checkstatus")
+        MvcResult mvcResult=mockMvc.perform(MockMvcRequestBuilders.post("v1/checkstatus")
                 .accept(MediaType.ALL)
                 .contentType(MediaType.ALL)
                 .header("tokenId", "abcde")
                 .param("name", "mukul")
-                .param("documentname", "pancard"));
+                .param("documentname", "pancard")
+        ).andReturn();
+          String responses=mvcResult.getResponse().getContentAsString();
+        assertEquals(mvcResult.getResponse().getContentAsString(),"Signed");
+        assertEquals(mvcResult.getResponse().getStatus(),200);
 
 
-        String test=checkStatusController.status("abcde","mukul","pancard");
-        assertEquals(test,"Signed");
-
-
-
-
-
-
+//        String test = checkStatusController.status("abcde", "mukul", "pancard");
+//        assertEquals(test, "Signed");
 
 
     }

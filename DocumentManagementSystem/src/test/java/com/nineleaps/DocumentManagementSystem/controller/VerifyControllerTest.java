@@ -21,6 +21,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
@@ -59,7 +61,7 @@ public class VerifyControllerTest {
                 .accept(MediaType.ALL)
                 .contentType(MediaType.ALL)
                 .param("userId","107583232828339878102")
-                .param("fileType","pancard"));
+                .param("fileType","pancard")).andExpect(status().isOk());
         ResponseEntity<CustomResponse> test=verifyController.verifierStatus("107583232828339878102","pancard");
 
         assertEquals(test.getStatusCode().toString(),"200 OK");
