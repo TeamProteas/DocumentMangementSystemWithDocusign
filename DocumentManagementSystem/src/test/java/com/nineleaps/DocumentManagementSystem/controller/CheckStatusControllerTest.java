@@ -20,6 +20,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.io.IOException;
 
+import static javax.swing.text.html.HTML.Tag.HEAD;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 import static sun.rmi.transport.TransportConstants.Return;
@@ -34,6 +35,7 @@ public class CheckStatusControllerTest {
     CheckStatusImpl checkStatusImpl;
     @Autowired
     MockMvc mockMvc;
+
 
     @Autowired
     private WebApplicationContext context;
@@ -50,7 +52,8 @@ public class CheckStatusControllerTest {
     @Test
     public void status() throws Exception {
 
-        when(checkStatusImpl.checkStatus("mukul","pancard")).thenReturn("Signed");
+        when(checkStatusImpl.checkStatus("mukul", "pancard")).thenReturn("Signed");
+
 
 
       MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/v1/checkstatus")
@@ -60,6 +63,7 @@ public class CheckStatusControllerTest {
                 .header("tokenId", "abcde")
                 .param("name", "mukul")
                 .param("documentname", "pancard")
+
 
 
       ).andReturn();
@@ -81,6 +85,9 @@ public class CheckStatusControllerTest {
 
 
 
+
+//        String test = checkStatusController.status("abcde", "mukul", "pancard");
+//        assertEquals(test, "Signed");
 
 
     }

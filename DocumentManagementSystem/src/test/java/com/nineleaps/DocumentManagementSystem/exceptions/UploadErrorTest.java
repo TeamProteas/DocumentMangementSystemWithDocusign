@@ -9,14 +9,13 @@ import static org.junit.Assert.*;
 
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
-public class ViewNoRecordsFoundTest {
+public class UploadErrorTest {
 
     @Test
-    public void Test(){
-        ViewNoRecordsFound viewNoRecordsFound=new ViewNoRecordsFound("abc");
-        assertEquals(viewNoRecordsFound.getMessage(),"abc");
+    public  void Test(){
+        UploadError uploadError=new UploadError("abc");
+        assertEquals(uploadError.getMessage(),"abc");
+
     }
-
-
 
 }
