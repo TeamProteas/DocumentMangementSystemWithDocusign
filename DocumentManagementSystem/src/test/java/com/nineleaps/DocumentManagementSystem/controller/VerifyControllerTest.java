@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -57,14 +58,13 @@ public class VerifyControllerTest {
         ResponseEntity<CustomResponse> entity=new ResponseEntity<CustomResponse>(HttpStatus.OK);
         when(verifyService.changeVerifyStatus("107583232828339878102","pancard")).thenReturn(entity);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("v1/verify/status")
+        MvcResult mvcResult=mockMvc.perform(MockMvcRequestBuilders.post("/v1/verify/status")
                 .accept(MediaType.ALL)
                 .contentType(MediaType.ALL)
                 .param("userId","107583232828339878102")
-                .param("fileType","pancard")).andExpect(status().isOk());
-        ResponseEntity<CustomResponse> test=verifyController.verifierStatus("107583232828339878102","pancard");
+                .param("fileType","pancard")).andReturn();
 
-        assertEquals(test.getStatusCode().toString(),"200 OK");
+        assertEquals(mvcResult.getResponse().getStatus(),200);
 
     }
 }

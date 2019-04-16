@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -47,11 +48,11 @@ StatusTableController statusTableController;
         List<StatusTableData> list=new ArrayList<StatusTableData>();
         when(statusTableService.getTableData()).thenReturn(list);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("v1/table")
+        MvcResult mvcResult=mockMvc.perform(MockMvcRequestBuilders.get("/v1/table")
                 .accept(MediaType.ALL)
-                .contentType(MediaType.ALL)
-                .header("tokenId", "abcde"));
-        List<StatusTableData> test=statusTableController.getstatus("abcde");
-        assertEquals(test.size(),0);
+                .contentType(MediaType.ALL)).andReturn();
+
+        assertEquals(mvcResult.getResponse().getStatus(),200);
+        assertEquals(mvcResult.getResponse().getContentAsString(),"[]");
     }
 }

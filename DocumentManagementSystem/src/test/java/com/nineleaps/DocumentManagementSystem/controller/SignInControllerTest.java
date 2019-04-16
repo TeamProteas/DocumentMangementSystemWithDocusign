@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -45,21 +46,16 @@ public class SignInControllerTest {
 
     @Test
     public void signInRequest() throws Exception {
-        ObjectMapper objectMapper=new ObjectMapper();
-
-        SigninResponseData entity=new SigninResponseData("siddhantsharma@gmail.com","108887776","fhdfh");
+        SigninResponseData entity = new SigninResponseData();
         when(signinService.authorizeUser()).thenReturn(entity);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("v1/delete")
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/v1/signin")
                 .accept(MediaType.ALL)
                 .contentType(MediaType.ALL)
-                .header("tokenId", "abcde"));
+                .header("tokenId", "abcde")).andReturn();
 
 
-        SigninResponseData test=signInController.signInRequest("abcde");
-        String mapper=objectMapper.writeValueAsString(test);
-
-        assertEquals(mapper,"{\"emailId\":\"siddhantsharma@gmail.com\",\"userId\":\"108887776\",\"view\":\"fhdfh\"}");
-
+        assertEquals(mvcResult.getResponse().getStatus(),200);
+        assertEquals(mvcResult.getResponse().getContentAsString(),"{\"emailId\":null,\"userId\":null,\"view\":null}");
     }
 }

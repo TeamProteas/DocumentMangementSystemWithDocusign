@@ -52,16 +52,17 @@ public class AddDocumentTypeControllerTest {
 
     @Test
     public void getNewDoctype() throws Exception {
+        ResponseEntity<CustomResponse> responseEntity = new ResponseEntity<CustomResponse>(HttpStatus.OK);
 
-
+        when(addDocumentTypeService.addDoctype("pancard", "Pan Card")).thenReturn(responseEntity);
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/v1/doctype/add")
-                .accept(MediaType.ALL)
-                .contentType(MediaType.ALL)
-                .header("tokenId", "abcde")
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .param("fileType", "pancard")
-                .param("displayName", "mukul")
-        ).andReturn();
-        String respon=mvcResult.getResponse().getContentAsString();
+                .param("displayName", "mukul"))
+                .andReturn();
+      assertEquals(mvcResult.getResponse().getStatus(),200);
+
 
 
     }

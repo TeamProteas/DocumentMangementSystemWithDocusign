@@ -23,7 +23,6 @@ public class SignInController {
     @GetMapping("/v1/signin")
     public SigninResponseData signInRequest() throws IOException, ParseException {
         System.out.println("SIGNIN:");
-        //System.out.println(tokenData);
         return signServiceImpl.authorizeUser();
 
     }

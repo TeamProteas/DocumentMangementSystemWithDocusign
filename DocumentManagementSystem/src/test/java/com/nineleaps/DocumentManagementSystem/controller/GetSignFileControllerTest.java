@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -50,13 +51,11 @@ public class GetSignFileControllerTest {
         when(getSignFileImpl.getFile("mukul","pancard")).thenReturn(responseEntity);
 
 
-        mockMvc.perform(MockMvcRequestBuilders.post("v1/getfile")
+       MvcResult mvcResult= mockMvc.perform(MockMvcRequestBuilders.get("/v1/getfile")
                 .accept(MediaType.ALL)
                 .contentType(MediaType.ALL)
-                .header("tokenId", "abcde")
                 .param("name","mukul")
-                .param("documentname","pancard"));
-        ResponseEntity<CustomResponse> data =getSignFileController.getFile("abcde","mukul","pancard");
-        assertEquals(data.getStatusCode().toString(),"200 OK");
+                .param("documentname","pancard")).andReturn();
+        assertEquals(mvcResult.getResponse().getStatus(),200);
     }
 }

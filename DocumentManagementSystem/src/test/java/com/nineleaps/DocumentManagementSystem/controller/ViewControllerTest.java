@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -53,14 +54,13 @@ public class ViewControllerTest {
         List<EmployeeData> employeeData=new ArrayList<EmployeeData>();
         when(viewService.fetchViewData()).thenReturn(employeeData);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("v1/view")
+        MvcResult mvcResult=mockMvc.perform(MockMvcRequestBuilders.get("/v1/view")
                 .accept(MediaType.ALL)
-                .contentType(MediaType.ALL)
-                .header("tokenId", "a"));
+                .contentType(MediaType.ALL))
+                .andReturn();
 
-        List<EmployeeData> test=viewController.getView("a");
-
-        assertEquals(test.size(),0);
+        assertEquals(mvcResult.getResponse().getStatus(),200);
+        assertEquals(mvcResult.getResponse().getContentAsString(),"[]");
 
 
 
