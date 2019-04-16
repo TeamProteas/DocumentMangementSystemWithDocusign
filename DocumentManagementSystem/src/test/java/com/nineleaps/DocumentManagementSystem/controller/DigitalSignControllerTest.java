@@ -13,6 +13,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -51,14 +52,13 @@ public class DigitalSignControllerTest {
     @Test
     public void digitalSign() throws Exception {
         doNothing().when(digitalSignImpl).sendSignRequest("mukul.joshi@nineleaps.com", "anmol", "", multipartFile, "pancard");
-
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/v1/dsign")
-                .accept(MediaType.ALL)
-                .contentType(MediaType.ALL)
+        byte[] file = new byte[1];
+        MockMultipartFile mockMultipartFile = new MockMultipartFile("data", file);
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.multipart("/v1/dsign")
+                .file("file",mockMultipartFile.getBytes())
                 .param("signeeEmailId", "mukul.joshi@nineleaps.com")
                 .param("signeeName", "anmol")
-                .param("name","mukul")
-                .param("file", String.valueOf(multipartFile))
+                .param("name", "mukul")
                 .param("documentName", "pancard")).andReturn();
 
         assertEquals(mvcResult.getResponse().getStatus(), 200);
