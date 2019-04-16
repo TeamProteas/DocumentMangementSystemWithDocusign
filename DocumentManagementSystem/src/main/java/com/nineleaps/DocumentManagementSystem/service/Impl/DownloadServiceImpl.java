@@ -33,22 +33,22 @@ public class DownloadServiceImpl implements DownloadService {
 
         EmployeeAccounts employeeAccounts = employeeAccountRepo.findbyEmailId(tokenRequestedData.getUserEmail());
         EmployeeData employeeData = employeeDataRepo.findFileRow(fileType, employeeAccounts.getUid().toString());
-        if (employeeData != null) {
-            System.out.println("file Available");
+            if (employeeData != null) {
+                System.out.println("file Available");
 
-            String filename = "/home/nineleaps/Desktop/UserData/" + employeeAccounts.getUid().toString() + "/" + fileType;
-            File file = new File(filename);
-            InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
-            HttpHeaders headers = new HttpHeaders();
-            headers.add("Content-Disposition", String.format("attachment;filename=\"%s\"", file.getName()));
-            headers.add("Cache-Control", "no-cache,no-store,must revalidate");
-            headers.add("Pragma", "no-cache");
-            headers.add("Expires", "0");
-            ResponseEntity<Object> responseEntity = ResponseEntity.ok().headers(headers).contentLength(file.length()).contentType(MediaType.parseMediaType("aplication/pdf")).body(resource);
-            return responseEntity;
-        } else {
-            System.out.println("File not found");
-            return null;
+                String filename = "/home/nineleaps/Desktop/UserData/" + employeeAccounts.getUid().toString() + "/" + fileType;
+                File file = new File(filename);
+                InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Content-Disposition", String.format("attachment;filename=\"%s\"", file.getName()));
+                headers.add("Cache-Control", "no-cache,no-store,must revalidate");
+                headers.add("Pragma", "no-cache");
+                headers.add("Expires", "0");
+                ResponseEntity<Object> responseEntity = ResponseEntity.ok().headers(headers).contentLength(file.length()).contentType(MediaType.parseMediaType("aplication/pdf")).body(resource);
+                return responseEntity;
+            } else {
+                System.out.println("File not found");
+                return null;
 
         }
     }
