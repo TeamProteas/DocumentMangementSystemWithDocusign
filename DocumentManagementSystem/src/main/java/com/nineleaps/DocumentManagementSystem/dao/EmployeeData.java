@@ -28,7 +28,7 @@ public class EmployeeData {
     private boolean verifiedStatus;
 
 
-    @Column(value = "orignalname")
+    @Column(value = "originalname")
     private String orignalName;
 
     @Column(value = "uploadedby")
