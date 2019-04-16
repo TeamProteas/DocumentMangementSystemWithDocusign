@@ -1,10 +1,8 @@
 package com.nineleaps.DocumentManagementSystem.service.Impl;
 
-import com.nineleaps.DocumentManagementSystem.dto.EmailNotificationData;
 import com.nineleaps.DocumentManagementSystem.service.EmailNotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -24,12 +22,12 @@ public class EmailNotificationImpl implements EmailNotificationService {
     @Autowired
     TemplateEngine templateEngine;
 
-    public String sendHtmlMail(String To, String templateName,String name,String description) throws MessagingException ,MailException{
+    public String sendHtmlMail(String To, String templateName, String name, String description) throws MessagingException, MailException {
         //set context
         Context context = new Context();
         context.setVariable("title", "REMINDER MAIL");
         context.setVariable("name", name);
-        context.setVariable("description",description );
+        context.setVariable("description", description);
 
         //process html template
         String body = templateEngine.process(templateName, context);
