@@ -17,9 +17,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,8 +36,9 @@ public class DocumentManagementInterceptor extends HandlerInterceptorAdapter {
         String fileType = req.getParameter("fileType");
         String userId = req.getParameter("userId");
         String tokenId = req.getHeader("tokenId");
-        String temp=req.getParameter("login");
+        String temp = req.getParameter("login");
         System.out.println(req.getRequestURI());
+
         System.out.println("TOKENID " + req.getHeader("tokenId"));
 
         CloseableHttpClient client = HttpClients.createDefault();
@@ -69,6 +67,7 @@ public class DocumentManagementInterceptor extends HandlerInterceptorAdapter {
         System.out.println(username);
         System.out.println(googleid);
 
+
         boolean value = employeeAccountsRepo.existsByEmailId(email);
         System.out.println(value);
 
@@ -81,13 +80,22 @@ public class DocumentManagementInterceptor extends HandlerInterceptorAdapter {
 
 
         if (req.getRequestURI().equals("/v1/upload")) {
-            accessControl(googleid, userId);
+            String userid=Extract(userId);
+            tokenRequestedData.setUserId(userid);
+            accessControl(googleid, userid);
+
 
         }
         return value;
     }
 
-
+    public String Extract(String id) throws ParseException {
+                JSONObject jsonObject=(JSONObject)new JSONParser().parse(id);
+                JSONObject data=(JSONObject) jsonObject.get("data");
+                JSONObject jsonObject1=(JSONObject)new JSONParser().parse(data.toString());
+                String userid=(String)jsonObject1.get("userId");
+        return userid;
+    }
 
     public void accessControl(String googleid, String userId) {
         EmployeeAccounts employeeAccounts = employeeAccountsRepo.findbyGoogleId(googleid);
