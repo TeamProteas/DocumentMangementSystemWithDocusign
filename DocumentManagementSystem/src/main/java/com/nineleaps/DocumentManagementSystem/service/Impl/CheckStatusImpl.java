@@ -1,6 +1,7 @@
 package com.nineleaps.DocumentManagementSystem.service.Impl;
 
 import com.nineleaps.DocumentManagementSystem.dao.DigitalSignData;
+import com.nineleaps.DocumentManagementSystem.exceptions.CustomResponse;
 import com.nineleaps.DocumentManagementSystem.repository.DigitalSignRepository;
 import com.nineleaps.DocumentManagementSystem.service.CheckStatusService;
 import com.signaturit.api.java_sdk.Client;
@@ -9,10 +10,13 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 @Service
 public class CheckStatusImpl implements CheckStatusService {
@@ -20,7 +24,10 @@ public class CheckStatusImpl implements CheckStatusService {
     @Autowired
     DigitalSignRepository digitalSignRepo;
 
-    public String checkStatus(String name, String documentname) throws IOException, ParseException {
+    public ResponseEntity<CustomResponse> checkStatus(String name, String documentname) throws IOException, ParseException {
+
+        CustomResponse customResponse = new CustomResponse(new Date(), "No Data Found",
+                "Current Status ", HttpStatus.CREATED.getReasonPhrase());
 
         //create signaturit client
         Client client = new Client("ZZlAEJyoeHkBIuezNagwtaXZxaXWQJyUyHpVgzRamorLNVQCieYiyyhQsdYgmDxUxrWbwIXhdMFHTzvjcMwvsR", false);
@@ -30,7 +37,7 @@ public class CheckStatusImpl implements CheckStatusService {
         try {
             digitalSignData = digitalSignRepo.findDocumentRow(name, documentname);
         } catch (Exception e) {
-            return "NO RECORD FOUND";
+            return new ResponseEntity<CustomResponse>(customResponse,HttpStatus.NO_CONTENT);
         }
 
         //get status
@@ -50,7 +57,8 @@ public class CheckStatusImpl implements CheckStatusService {
 
         digitalSignData.setDocumentId(documentId);
         digitalSignRepo.save(digitalSignData);
-        return signStatus;
+        customResponse.setMessage(signStatus);
+        return new ResponseEntity<CustomResponse>(customResponse,HttpStatus.OK);
     }
 }
 
