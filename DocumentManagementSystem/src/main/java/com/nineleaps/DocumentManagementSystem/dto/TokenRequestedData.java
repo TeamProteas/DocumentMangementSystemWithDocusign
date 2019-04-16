@@ -8,6 +8,15 @@ public class TokenRequestedData {
     String googleId;
     String userEmail;
     String userName;
+    String userId;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public String getUserName() {
         return userName;

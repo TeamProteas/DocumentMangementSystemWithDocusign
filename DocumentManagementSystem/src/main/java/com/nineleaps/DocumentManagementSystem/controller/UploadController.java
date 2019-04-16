@@ -1,6 +1,7 @@
 package com.nineleaps.DocumentManagementSystem.controller;
 
 
+import com.nineleaps.DocumentManagementSystem.dto.TokenRequestedData;
 import com.nineleaps.DocumentManagementSystem.exceptions.CustomResponse;
 import com.nineleaps.DocumentManagementSystem.service.Impl.UploadServiceImpl;
 import org.json.simple.parser.ParseException;
@@ -22,16 +23,19 @@ public class UploadController {
     @Autowired
     UploadServiceImpl uploadServiceImpl;
 
+    @Autowired
+    TokenRequestedData tokenRequestedData;
+
 
 
 
     @ResponseBody
     @PostMapping(value = "/v1/upload")
     public ResponseEntity<CustomResponse> fetchData(@RequestParam("file") MultipartFile multipartFile,
-                                                    @RequestParam String fileType,@RequestParam String userId) throws IOException, ParseException {
+                                                    @RequestParam("fileType") String fileType) throws IOException, ParseException {
         System.out.println("UPLOAD:");
         //System.out.println(tokenData);
-        return uploadServiceImpl.storeData(multipartFile, fileType,userId);
+        return uploadServiceImpl.storeData(multipartFile, fileType,tokenRequestedData.getUserId());
 
     }
 

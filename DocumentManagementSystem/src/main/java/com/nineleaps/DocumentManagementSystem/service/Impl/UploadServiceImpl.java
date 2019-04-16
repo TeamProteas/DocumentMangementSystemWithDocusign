@@ -108,7 +108,7 @@ public class UploadServiceImpl implements UploadService {
         CustomResponse customResponse = new CustomResponse(new Date(), "Success",
                 "the file was uploaded sucessfully!", HttpStatus.CREATED.getReasonPhrase());
 
-        statusTableService.checkStatus(userId);
+       statusTableService.checkStatus(userId);
 
         return new ResponseEntity<CustomResponse>(customResponse, HttpStatus.CREATED);
     }
