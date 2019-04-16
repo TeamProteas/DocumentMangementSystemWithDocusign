@@ -17,16 +17,17 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
 
 import java.io.IOException;
 import java.net.InetAddress;
+
 @Configuration
 @EnableCassandraRepositories(basePackages = "com.nineleaps.DocumentManagementSystem.repository")
 @EnableElasticsearchRepositories(basePackages = "com.nineleaps.DocumentManagementSystem.repository")
 public class ElasticSearchConfig {
 
 
-    @Bean
-    public ElasticsearchOperations elasticsearchTemplate() throws Exception {
-        return new ElasticsearchTemplate(client());
-    }
+//    @Bean
+//    public ElasticsearchOperations elasticsearchTemplate() throws Exception {
+//        return new ElasticsearchTemplate(client());
+//    }
 
     @Bean
     public Client client() throws IOException {
