@@ -24,8 +24,8 @@ public class ViewServiceImpl implements ViewService {
 
 
     @Override
-    public List<EmployeeData> fetchViewData() {
-        EmployeeAccounts employeeAccounts = employeeAccountsRepo.findbyEmailId(tokenRequestedData.getUserEmail());
+    public List<EmployeeData> fetchViewData(String userId) {
+        EmployeeAccounts employeeAccounts = employeeAccountsRepo.findbyGoogleId(userId);
         List<EmployeeData> employeeData = employeeDataRepo.findByfolderUid(employeeAccounts.getUid().toString());
 
         //CHECKING IF USER HAS UPLOADED ANY DOCUMENTS OR NOT ,

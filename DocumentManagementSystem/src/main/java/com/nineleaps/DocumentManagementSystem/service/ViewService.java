@@ -9,6 +9,6 @@ import java.util.List;
 @Service
 public interface ViewService {
 
-    public List<EmployeeData> fetchViewData() throws ViewNoRecordsFound;
+    public List<EmployeeData> fetchViewData(String userId) throws ViewNoRecordsFound;
 }
 
