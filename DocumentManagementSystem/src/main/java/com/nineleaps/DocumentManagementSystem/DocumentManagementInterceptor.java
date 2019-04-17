@@ -38,6 +38,7 @@ public class DocumentManagementInterceptor extends HandlerInterceptorAdapter {
         String tokenId = req.getHeader("tokenId");
         String temp = req.getParameter("login");
         System.out.println(req.getRequestURI());
+        System.out.println(temp);
 
         System.out.println("TOKENID " + req.getHeader("tokenId"));
 
