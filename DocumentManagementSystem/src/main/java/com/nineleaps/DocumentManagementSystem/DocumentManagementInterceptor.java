@@ -38,6 +38,7 @@ public class DocumentManagementInterceptor extends HandlerInterceptorAdapter {
         String tokenId = req.getHeader("tokenId");
         String temp = req.getParameter("login");
         System.out.println(req.getRequestURI());
+        System.out.println(temp);
 
         System.out.println("TOKENID " + req.getHeader("tokenId"));
 
@@ -77,25 +78,18 @@ public class DocumentManagementInterceptor extends HandlerInterceptorAdapter {
         tokenRequestedData.setGoogleId(googleid);
         tokenRequestedData.setUserEmail(email);
         tokenRequestedData.setUserName(username);
+        tokenRequestedData.setUserId(userId);
 
 
         if (req.getRequestURI().equals("/v1/upload")) {
-            String userid=Extract(userId);
-            tokenRequestedData.setUserId(userid);
-            accessControl(googleid, userid);
+            accessControl(googleid, userId);
 
 
         }
         return value;
     }
 
-    public String Extract(String id) throws ParseException {
-                JSONObject jsonObject=(JSONObject)new JSONParser().parse(id);
-                JSONObject data=(JSONObject) jsonObject.get("data");
-                JSONObject jsonObject1=(JSONObject)new JSONParser().parse(data.toString());
-                String userid=(String)jsonObject1.get("userId");
-        return userid;
-    }
+
 
     public void accessControl(String googleid, String userId) {
         EmployeeAccounts employeeAccounts = employeeAccountsRepo.findbyGoogleId(googleid);
