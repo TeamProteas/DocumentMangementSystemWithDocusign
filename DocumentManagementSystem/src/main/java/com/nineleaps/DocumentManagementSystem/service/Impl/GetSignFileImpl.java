@@ -2,7 +2,6 @@ package com.nineleaps.DocumentManagementSystem.service.Impl;
 
 import com.nineleaps.DocumentManagementSystem.dao.DigitalSignData;
 import com.nineleaps.DocumentManagementSystem.exceptions.CustomResponse;
-import com.nineleaps.DocumentManagementSystem.exceptions.ViewNoRecordsFound;
 import com.nineleaps.DocumentManagementSystem.repository.DigitalSignRepository;
 import com.signaturit.api.java_sdk.Client;
 import okhttp3.Response;
@@ -12,7 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Date;
 
 @Service
@@ -47,11 +49,11 @@ public class GetSignFileImpl {
             customResponse.setDetails("File is not signed till now");
             customResponse.setHttpCodeMessage(HttpStatus.FORBIDDEN.toString());
             e.printStackTrace();
-            return new ResponseEntity<CustomResponse>(customResponse,HttpStatus.FORBIDDEN);
+            return new ResponseEntity<CustomResponse>(customResponse, HttpStatus.FORBIDDEN);
         }
 
+        return new ResponseEntity<CustomResponse>(customResponse, HttpStatus.OK);
 
-        return new ResponseEntity<CustomResponse>(customResponse,HttpStatus.OK);
-
-    }}
+    }
+}
 

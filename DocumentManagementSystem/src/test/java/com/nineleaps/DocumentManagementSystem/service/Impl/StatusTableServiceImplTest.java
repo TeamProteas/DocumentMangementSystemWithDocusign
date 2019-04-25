@@ -51,30 +51,24 @@ public class StatusTableServiceImplTest {
 
     @Test
     public void checkStatus() {
-        List<EmployeeData> employeeData = new ArrayList<>();
-        when(employeeAccountsRepository.findbyGoogleId("107583232828339878102")).thenReturn(employeeAccounts);
-        when(documentTypeRepository.count()).thenReturn(6l);
-//        when(employeeDataRepository.findByfolderUid("107583232828339878102")).thenReturn(employeeData);
-//        doNothing().when(employeeAccountsRepository).updateallUploaded(true, employeeAccounts.getUid());
-        when(employeeDataRepository.findByfolderUidAndVerified(employeeAccounts.getUid().toString())).thenReturn(Stream
-                .of(new EmployeeData(UUID.fromString("c465dd21-deda-400b-a788-179025e31898"), "pancard",
-                        "da0d1a7d-ac1e-47a0-bf45-c19ec50101aa", true, "mukul", "mukul",
-                        32343243243242l), new EmployeeData(UUID.fromString("c465dd21-deda-400b-a788-179025e31898"), "pancard",
-                        "da0d1a7d-ac1e-47a0-bf45-c19ec50101aa", true, "mukul", "mukul",
-                        32343243243242l)).collect(Collectors.toList()));
-//        doNothing().when(employeeAccountsRepository).updateallVerified(true, employeeAccounts.getUid());
+        List<EmployeeData> employeeData1=new ArrayList<EmployeeData>();
+       when(employeeAccountsRepository.findbyGoogleId("123")).thenReturn(employeeAccounts);
+       when(documentTypeRepository.count()).thenReturn(1l);
+       service.checkStatus("123");
 
-        service.checkStatus("107583232828339878102");
-
+        when(employeeAccountsRepository.findbyGoogleId("123")).thenReturn(employeeAccounts);
+        when(documentTypeRepository.count()).thenReturn(0l);
+        service.checkStatus("123");
     }
 
     @Test
     public void getTableData() {
-        List<EmployeeData> employeeData = new ArrayList<>();
+        List<EmployeeAccounts> employeeAccounts1=new ArrayList<EmployeeAccounts>();
+        employeeAccounts1.add(0,employeeAccounts);
+        when(employeeAccountsRepository.findAll()).thenReturn(employeeAccounts1);
 
-//        when(employeeDataRepository.findAll()).thenReturn(employeeData);
         List<StatusTableData> statusTableData1 = service.getTableData();
-        assertEquals(statusTableData1.size(),0);
+        assertEquals(statusTableData1.size(), 1);
 
 
     }

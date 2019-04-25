@@ -20,9 +20,9 @@ public class TokenRequestedDataTest {
         tokenRequestedData.setGoogleId("328712398171223");
         tokenRequestedData.setUserEmail("mukul.joshi@nineleaps.com");
         tokenRequestedData.setUserName("mukul joshi");
+        tokenRequestedData.setUserId("abc");
         String test=objectMapper.writeValueAsString(tokenRequestedData);
-        assertEquals(test,"{\"googleId\":\"328712398171223\",\"userEmail\":\"mukul.joshi@nineleaps.com\",\"userName\":\"mukul joshi\"}");
-
+        assertEquals(test,"{\"googleId\":\"328712398171223\",\"userEmail\":\"mukul.joshi@nineleaps.com\",\"userName\":\"mukul joshi\",\"userId\":\"abc\"}");
     }
 
 }

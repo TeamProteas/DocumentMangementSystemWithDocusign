@@ -54,7 +54,7 @@ public class AddDocumentTypeControllerTest {
     public void getNewDoctype() throws Exception {
         ResponseEntity<CustomResponse> responseEntity = new ResponseEntity<CustomResponse>(HttpStatus.OK);
 
-        when(addDocumentTypeService.addDoctype("pancard", "Pan Card")).thenReturn(responseEntity);
+//        when(addDocumentTypeService.addDoctype("pancard", "Pan Card")).thenReturn(responseEntity);
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/v1/doctype/add")
                 .accept(MediaType.APPLICATION_JSON_VALUE)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)

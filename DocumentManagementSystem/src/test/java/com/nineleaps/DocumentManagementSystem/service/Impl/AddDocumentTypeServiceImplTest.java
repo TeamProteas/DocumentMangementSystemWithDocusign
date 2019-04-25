@@ -37,7 +37,6 @@ public class AddDocumentTypeServiceImplTest {
 
     @Test
     public void addDoctype() throws  Exception{
-//        when(documentTypeRepository.save(documentType)).thenReturn(documentType);
 
 
         ResponseEntity<CustomResponse> customResponseResponseEntity = addDocumentTypeService.addDoctype( "aadharcard", "Aadhar Card");

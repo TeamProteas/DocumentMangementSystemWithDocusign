@@ -44,9 +44,8 @@ public class UploadControllerTest {
 
     @Mock
     UploadServiceImpl uploadService;
-
     @Mock
-    MultipartFile multipart;
+    MockMultipartFile mockMultipartFile;
 
 
     @Before
@@ -63,13 +62,18 @@ public class UploadControllerTest {
 
     @Test
     public void fetchData() throws Exception {
+        String s="skjdhsjkdkshjdkdldlsadhlsafhldfhjkdfahdsdhdjsdhfdjshgdshfgdf";
+        byte[] file =s.getBytes();
+//        MockMultipartFile mockMultipartFile = new MockMultipartFile("data", file);
         ResponseEntity<CustomResponse> entity = new ResponseEntity<CustomResponse>(HttpStatus.OK);
-        when(uploadService.storeData(multipart, "pancard", "107583232828339878102")).thenReturn(entity);
-        byte[] file = new byte[1];
-        MockMultipartFile mockMultipartFile = new MockMultipartFile("data", file);
+        when(uploadService.storeData(mockMultipartFile, "pancard", "107583232828339878102")).thenReturn(entity);
+
+
+
 
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.multipart("/v1/upload")
                 .file("file",mockMultipartFile.getBytes())
+//                .param("file",mockMultipartFile.getBytes().toString())
                 .param("fileType", "pancard")
                 .param("userId", "107583232828339878102")).andReturn();
         assertEquals(mvcResult.getResponse().getStatus(), 200);

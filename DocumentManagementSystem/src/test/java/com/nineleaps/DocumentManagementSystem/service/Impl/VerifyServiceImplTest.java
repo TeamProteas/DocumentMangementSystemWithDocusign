@@ -37,14 +37,22 @@ public class VerifyServiceImplTest {
     EmployeeData employeeData = new EmployeeData(UUID.fromString("c465dd21-deda-400b-a788-179025e31898"), "pancard",
             "da0d1a7d-ac1e-47a0-bf45-c19ec50101aa", true, "mukul", "mukul",
             32343243243242l);
+    EmployeeData employeeData1 = new EmployeeData(UUID.fromString("c465dd21-deda-400b-a788-179025e31898"), "pancard",
+            "da0d1a7d-ac1e-47a0-bf45-c19ec50101aa", false, "mukul", "mukul",
+            32343243243242l);
 
     @Test
     public void changeVerifyStatus() {
         when(employeeAccountsRepository.findbyGoogleId("107583232828339878102")).thenReturn(employeeAccounts);
         when(employeeDataRepository.findFileRow("pancard",employeeAccounts.getUid().toString())).thenReturn(employeeData);
-       // doNothing().when(employeeData).setVerifiedStatus(true);
 
         ResponseEntity<CustomResponse> responseEntity=verifyService.changeVerifyStatus(employeeAccounts.getGoogleId(),"pancard");
+        assertEquals(responseEntity.getStatusCode().getReasonPhrase(),"OK");
+
+        when(employeeAccountsRepository.findbyGoogleId("107583232828339878102")).thenReturn(employeeAccounts);
+        when(employeeDataRepository.findFileRow("pancard",employeeAccounts.getUid().toString())).thenReturn(employeeData1);
+
+        ResponseEntity<CustomResponse> responseEntity1=verifyService.changeVerifyStatus(employeeAccounts.getGoogleId(),"pancard");
         assertEquals(responseEntity.getStatusCode().getReasonPhrase(),"OK");
 
 
