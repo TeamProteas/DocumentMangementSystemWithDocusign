@@ -3,15 +3,14 @@ package com.nineleaps.DocumentManagementSystem.controller;
 import com.nineleaps.DocumentManagementSystem.dao.DocumentType;
 import com.nineleaps.DocumentManagementSystem.service.Impl.DocumentTypeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-@Controller
+
+@RestController
 @CrossOrigin
 public class DocumentTypeController {
 

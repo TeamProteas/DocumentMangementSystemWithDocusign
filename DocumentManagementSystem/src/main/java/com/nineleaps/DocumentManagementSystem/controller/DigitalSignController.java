@@ -1,14 +1,15 @@
 package com.nineleaps.DocumentManagementSystem.controller;
 
-import com.nineleaps.DocumentManagementSystem.exceptions.ViewNoRecordsFound;
 import com.nineleaps.DocumentManagementSystem.service.Impl.DigitalSignImpl;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-
 
 @CrossOrigin
 @RestController
