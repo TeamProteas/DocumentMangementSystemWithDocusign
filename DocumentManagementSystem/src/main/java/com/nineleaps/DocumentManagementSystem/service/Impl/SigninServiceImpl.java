@@ -25,8 +25,8 @@ public class SigninServiceImpl implements SignInService {
 
     @Override
     public SigninResponseData authorizeUser() {
-//        System.out.println(tokenRequestedData.getGoogleId());
-//        System.out.println(tokenRequestedData.getUserEmail());
+        System.out.println(tokenRequestedData.getGoogleId());
+        System.out.println(tokenRequestedData.getUserEmail());
 
         //UPDATING GOOGLE ID INTO THE DATABASE
         EmployeeAccounts data = employeeAccountRepo.findbyEmailId(tokenRequestedData.getUserEmail());

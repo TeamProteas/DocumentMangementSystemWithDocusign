@@ -51,7 +51,7 @@ public class DigitalSignControllerTest {
 
     @Test
     public void digitalSign() throws Exception {
-        doNothing().when(digitalSignImpl).sendSignRequest("mukul.joshi@nineleaps.com", "anmol", "", multipartFile, "pancard");
+//        doNothing().when(digitalSignImpl).sendSignRequest("mukul.joshi@nineleaps.com", "anmol", "", multipartFile, "pancard");
         byte[] file = new byte[1];
         MockMultipartFile mockMultipartFile = new MockMultipartFile("data", file);
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.multipart("/v1/dsign")

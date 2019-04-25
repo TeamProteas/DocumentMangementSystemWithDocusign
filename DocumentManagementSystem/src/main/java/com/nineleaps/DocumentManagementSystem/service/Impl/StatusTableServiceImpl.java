@@ -51,9 +51,7 @@ public class StatusTableServiceImpl implements StatusTableService {
         List<StatusTableData> statusTableData = new ArrayList<>();
         for (EmployeeAccounts emp : employeeAccounts) {
             statusTableData.add(new StatusTableData(emp.getEmailId(), emp.getEmployeeId(), emp.isAllVerified(), emp.isAllUploaded(), emp.getFirstName(), emp.getLastName()));
-
         }
-
         return statusTableData;
     }
 }

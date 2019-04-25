@@ -55,8 +55,8 @@ public class ViewControllerTest {
         when(viewService.fetchViewData()).thenReturn(employeeData);
 
         MvcResult mvcResult=mockMvc.perform(MockMvcRequestBuilders.get("/v1/view")
-                .accept(MediaType.ALL)
-                .contentType(MediaType.ALL))
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+                .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andReturn();
 
         assertEquals(mvcResult.getResponse().getStatus(),200);
