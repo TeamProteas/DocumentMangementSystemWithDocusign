@@ -80,7 +80,7 @@ public class DocumentManagementInterceptor extends HandlerInterceptorAdapter {
 
             if (req.getRequestURI().equals("/v1/upload")) {
                 System.out.println(req.getParameter("fileType"));
-                String f=req.getParameter("file");
+                String f = req.getParameter("file");
                 System.out.println(f);
                 accessControl(googleid, userId);
             }

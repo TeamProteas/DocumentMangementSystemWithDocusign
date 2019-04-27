@@ -52,11 +52,12 @@ public class ViewControllerTest {
     @Test
     public void getView() throws Exception {
         List<EmployeeData> employeeData=new ArrayList<EmployeeData>();
-        when(viewService.fetchViewData()).thenReturn(employeeData);
+//        when(viewService.fetchViewData("")).thenReturn(employeeData);
 
         MvcResult mvcResult=mockMvc.perform(MockMvcRequestBuilders.get("/v1/view")
                 .accept(MediaType.APPLICATION_JSON_VALUE)
-                .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+        .param("userId","21987327378293"))
                 .andReturn();
 
         assertEquals(mvcResult.getResponse().getStatus(),200);

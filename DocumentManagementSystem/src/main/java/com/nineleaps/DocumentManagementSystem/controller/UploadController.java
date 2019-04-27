@@ -31,10 +31,11 @@ public class UploadController {
     @ResponseBody
     @PostMapping("/v1/upload")
     public ResponseEntity<CustomResponse> fetchData(@RequestParam("file") MultipartFile multipartFile,
-                                                    @RequestParam("fileType") String fileType) throws IOException, ParseException {
+                                                    @RequestParam("fileType") String fileType,
+                                                    @RequestParam("userId") String userId) throws IOException, ParseException {
         System.out.println("UPLOAD:");
         //System.out.println(tokenData);
-        return uploadServiceImpl.storeData(multipartFile, fileType, tokenRequestedData.getUserId());
+        return uploadServiceImpl.storeData(multipartFile, fileType, userId);
 
     }
 

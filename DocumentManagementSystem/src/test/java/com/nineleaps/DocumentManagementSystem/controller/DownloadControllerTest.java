@@ -58,7 +58,7 @@ public class DownloadControllerTest {
        MvcResult mvcResult= mockMvc.perform(MockMvcRequestBuilders.get("/v1/download")
                 .accept(MediaType.ALL)
                 .contentType(MediaType.ALL)
-                .param("file", "pancard")).andReturn();
+                .param("fileType", "pancard")).andReturn();
         assertEquals(mvcResult.getResponse().getStatus(),200);
 
 

@@ -6,6 +6,7 @@ import com.nineleaps.DocumentManagementSystem.repository.DigitalSignRepository;
 import com.nineleaps.DocumentManagementSystem.service.CheckStatusService;
 import com.signaturit.api.java_sdk.Client;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -42,7 +43,8 @@ public class CheckStatusImpl implements CheckStatusService {
 
         //get status
         Response response = client.getSignature(digitalSignData.getSignatureRequestId());
-        String bodyString = response.body().string();
+        ResponseBody responseBody=response.body();
+        String bodyString = responseBody.toString();
         System.out.println(bodyString);
 
         //extract document id
