@@ -34,7 +34,8 @@ public class GetSignFileImpl {
 
             DigitalSignData digitalSignData = digitalSignRepo.findDocumentRow(name, documentname);
             Response response = client.downloadSignedDocument(digitalSignData.getSignatureRequestId(), digitalSignData.getDocumentId());
-            ResponseBody responseBody = response.body();
+            ResponseBody responseBody ;
+            responseBody= response.body();
 
             File file = new File("/home/nineleaps/Desktop/UserData/" + digitalSignData.getDocumentName() + "-" + digitalSignData.getPerson());
             OutputStream os = new FileOutputStream(file);

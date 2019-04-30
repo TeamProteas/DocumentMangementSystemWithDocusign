@@ -8,6 +8,7 @@ import com.nineleaps.DocumentManagementSystem.service.ViewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -28,7 +29,8 @@ public class ViewServiceImpl implements ViewService {
         // IF NO DOCUMENTS ARE PRESENT IN THE DATABASE THEN THROW AN EXCEPTION
         System.out.println(employeeData.size());
         if (employeeData.size() == 0) {
-            return null;
+            List<EmployeeData> employeeData1=new ArrayList<EmployeeData>();
+            return employeeData1;
         }
         return employeeData;
     }

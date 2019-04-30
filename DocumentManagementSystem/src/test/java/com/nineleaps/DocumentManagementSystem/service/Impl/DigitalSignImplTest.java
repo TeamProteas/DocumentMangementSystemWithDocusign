@@ -35,7 +35,7 @@ public class DigitalSignImplTest {
     @InjectMocks
     DigitalSignImpl digitalSign;
     @Mock
-    DigitalSignRepository digitalSignRepo;
+    DigitalSignRepository digitalSignRepos;
     @Mock
     Client client;
 
@@ -55,7 +55,7 @@ public class DigitalSignImplTest {
     @Test
     public void sendSignRequest() throws Exception {
         byte[] files = new byte[1];
-        String test = "{\"emailId\":\"abc\",\"userId\":\"abc\",\"view\":\"abc\"}";
+//        String test = "{\"emailId\":\"abc\",\"userId\":\"abc\",\"view\":\"abc\"}";
         objectMapper = new ObjectMapper();
 
         realResponseBody = new RealResponseBody("Test", 1l, bufferedSource);
