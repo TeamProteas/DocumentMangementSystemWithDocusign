@@ -26,18 +26,18 @@ public class GetSignFileImpl {
     public ResponseEntity<CustomResponse> getFile(String name, String documentname) throws IOException {
 
         //creating  signaturit client
-        Client client = new Client("ZZlAEJyoeHkBIuezNagwtaXZxaXWQJyUyHpVgzRamorLNVQCieYiyyhQsdYgmDxUxrWbwIXhdMFHTzvjcMwvsR", false);
-
-        //getting credentials
-        DigitalSignData digitalSignData;
-        Response response;
         CustomResponse customResponse = new CustomResponse(new Date(), "Success",
                 "Downloaded", HttpStatus.OK.getReasonPhrase());
         try {
-            digitalSignData = digitalSignRepo.findDocumentRow(name, documentname);
-            response = client.downloadSignedDocument(digitalSignData.getSignatureRequestId(), digitalSignData.getDocumentId());
+            Client client = new Client("ZZlAEJyoeHkBIuezNagwtaXZxaXWQJyUyHpVgzRamorLNVQCieYiyyhQsdYgmDxUxrWbwIXhdMFHTzvjcMwvsR", false);
+
+
+            DigitalSignData digitalSignData = digitalSignRepo.findDocumentRow(name, documentname);
+            Response response = client.downloadSignedDocument(digitalSignData.getSignatureRequestId(), digitalSignData.getDocumentId());
+            ResponseBody responseBody ;
+            responseBody= response.body();
+
             File file = new File("/home/nineleaps/Desktop/UserData/" + digitalSignData.getDocumentName() + "-" + digitalSignData.getPerson());
-            ResponseBody responseBody = response.body();
             OutputStream os = new FileOutputStream(file);
 
             byte[] byteArray = responseBody.bytes();

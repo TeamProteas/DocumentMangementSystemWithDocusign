@@ -4,9 +4,8 @@ import com.nineleaps.DocumentManagementSystem.dao.DigitalSignData;
 import com.nineleaps.DocumentManagementSystem.repository.DigitalSignRepository;
 import com.nineleaps.DocumentManagementSystem.service.DigitalSignService;
 import com.signaturit.api.java_sdk.Client;
-
-
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -51,7 +50,8 @@ public class DigitalSignImpl implements DigitalSignService {
 
         Response response = client.createSignature(signFiles, recipients);
         //extracting response
-        String a = response.body().string();
+        ResponseBody responseBody = response.body();
+        String a = responseBody.toString();
         JSONObject json = (JSONObject) new JSONParser().parse(a);
         String id = (String) json.get("id");
         System.out.println(id);

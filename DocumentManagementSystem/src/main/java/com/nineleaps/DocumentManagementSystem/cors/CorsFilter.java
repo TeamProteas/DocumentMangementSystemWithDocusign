@@ -32,7 +32,8 @@ public class CorsFilter implements WebFilter {
                 return chain.filter(exchange);
             }
 
-        } else {
+        }
+        else {
             return chain.filter(exchange);
         }
 

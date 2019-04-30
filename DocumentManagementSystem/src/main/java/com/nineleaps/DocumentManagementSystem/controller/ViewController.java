@@ -18,7 +18,7 @@ public class ViewController {
 
     @ResponseBody
     @GetMapping("v1/view")
-    public List<EmployeeData> getView(@RequestParam String userId) throws IOException, ParseException {
+    public List<EmployeeData> getView(@RequestParam("userId") String userId) throws IOException, ParseException {
 
         System.out.println("VIEW:");
         return viewServiceImpl.fetchViewData(userId);

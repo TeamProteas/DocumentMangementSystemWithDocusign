@@ -7,6 +7,7 @@ import com.nineleaps.DocumentManagementSystem.exceptions.SignInInvalidTokenError
 import com.nineleaps.DocumentManagementSystem.exceptions.SignInUserDataNotFound;
 import com.nineleaps.DocumentManagementSystem.repository.EmployeeAccountsRepository;
 import org.apache.http.HttpEntity;
+import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -26,6 +27,7 @@ public class DocumentManagementInterceptor extends HandlerInterceptorAdapter {
 
     @Autowired
     EmployeeAccountsRepository employeeAccountsRepo;
+
     @Autowired
     TokenRequestedData tokenRequestedData;
 
@@ -39,21 +41,23 @@ public class DocumentManagementInterceptor extends HandlerInterceptorAdapter {
 
             System.out.println("TOKENID " + req.getHeader("tokenId"));
 
-            CloseableHttpClient client = HttpClients.createDefault();
+            CloseableHttpClient client;
+            client = HttpClients.createDefault();
             HttpGet request = new HttpGet("https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + tokenId);
-            CloseableHttpResponse response = null;
+            CloseableHttpResponse closeableHttpResponse = null;
 
-            response = client.execute(request);
-            int status = response.getStatusLine().getStatusCode();
+            closeableHttpResponse = client.execute(request);
+            StatusLine statusLine = closeableHttpResponse.getStatusLine();
+            int status = statusLine.getStatusCode();
 
             if (!(status >= 200 && status < 300)) {
-                System.out.println("Unexpected response status: " + status);
+                System.out.println("Unexpected Response status: " + status);
 
                 //GIVES ERROR IF THE TOKEN IS INVALID
                 throw new SignInInvalidTokenError("the token provided is INVALID");
             }
 
-            HttpEntity entity = response.getEntity();
+            HttpEntity entity = closeableHttpResponse.getEntity();
             String responseString = EntityUtils.toString(entity, "UTF-8");
             System.out.println(responseString);
 
@@ -80,7 +84,7 @@ public class DocumentManagementInterceptor extends HandlerInterceptorAdapter {
 
             if (req.getRequestURI().equals("/v1/upload")) {
                 System.out.println(req.getParameter("fileType"));
-                String f=req.getParameter("file");
+                String f = req.getParameter("file");
                 System.out.println(f);
                 accessControl(googleid, userId);
             }
@@ -95,5 +99,4 @@ public class DocumentManagementInterceptor extends HandlerInterceptorAdapter {
         if (!googleid.equals(userId) && !employeeAccounts.getDesignation().equals("HR")) {
             throw new NotAllowedToUpload("You are not allowed to upload into other employee accounts");
         }
-    }
-}
+    }}

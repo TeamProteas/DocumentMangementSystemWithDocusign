@@ -34,7 +34,7 @@ public class ElasticSearchConfig {
 
         System.setProperty("es.set.netty.runtime.available.processors", "false");
 
-        Settings esSettings = Settings.builder()
+        Settings esSettings =Settings.builder()
                 .put("cluster.name", "elasticsearch")
                 .build();
         TransportClient client = new PreBuiltTransportClient(esSettings);
