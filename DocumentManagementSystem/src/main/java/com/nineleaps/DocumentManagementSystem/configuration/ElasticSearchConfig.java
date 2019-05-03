@@ -11,8 +11,6 @@ import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
-import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
-import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
 import java.io.IOException;
@@ -34,7 +32,7 @@ public class ElasticSearchConfig {
 
         System.setProperty("es.set.netty.runtime.available.processors", "false");
 
-        Settings esSettings =Settings.builder()
+        Settings esSettings = Settings.builder()
                 .put("cluster.name", "elasticsearch")
                 .build();
         TransportClient client = new PreBuiltTransportClient(esSettings);

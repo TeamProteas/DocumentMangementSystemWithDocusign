@@ -68,7 +68,7 @@ public class EmailNotificationControllerTest {
 //       when(notificationImpl.sendHtmlMail("","","","")).thenReturn(new ResponseEntity<CustomResponse>(customResponse,HttpStatus.OK));
 
 
-        MvcResult mvcResult=mockMvc.perform(MockMvcRequestBuilders.get("/v1/sendhtml")
+        MvcResult mvcResult=mockMvc.perform(MockMvcRequestBuilders.post("/v1/sendhtml")
                 .accept(MediaType.ALL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(data)).andReturn();
