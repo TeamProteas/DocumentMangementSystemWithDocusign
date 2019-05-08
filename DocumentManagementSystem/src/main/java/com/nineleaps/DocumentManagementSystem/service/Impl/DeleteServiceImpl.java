@@ -4,6 +4,7 @@ import com.nineleaps.DocumentManagementSystem.dao.EmployeeAccounts;
 import com.nineleaps.DocumentManagementSystem.dao.EmployeeData;
 import com.nineleaps.DocumentManagementSystem.dto.TokenRequestedData;
 import com.nineleaps.DocumentManagementSystem.exceptions.CustomResponse;
+import com.nineleaps.DocumentManagementSystem.exceptions.FileTypeEmpty;
 import com.nineleaps.DocumentManagementSystem.repository.EmployeeAccountsRepository;
 import com.nineleaps.DocumentManagementSystem.repository.EmployeeDataRepository;
 import com.nineleaps.DocumentManagementSystem.service.DeleteService;
@@ -31,13 +32,15 @@ public class DeleteServiceImpl implements DeleteService {
     public ResponseEntity<CustomResponse> deleteRecord(String fileType, String userId) {
         String message = "Success";
         String details = "the file was deleted sucessfully!";
+
         EmployeeAccounts employeeAccounts = employeeAccountsRepo.findbyGoogleId(userId);
         EmployeeData employeeData = employeeDataRepo.findFileRow(fileType, employeeAccounts.getUid().toString());
         if (employeeData == null) {
             message = "NoData";
             details = "No data found to delete";
+            throw new  FileTypeEmpty("File Type null");
 
-            System.out.println("No data found");
+
         } else {
             employeeDataRepo.deleteByUid(employeeData.getUid());
         }

@@ -28,10 +28,10 @@ ElasticSearchDataRepository elasticSearchDataRepository;
 @Transactional
 public  void loadData(){
 
-    List<EmployeeAccounts> employeeData = employeeAccountsRepository.findAll();
+    List<EmployeeAccounts> employeeAccounts = employeeAccountsRepository.findAll();
 
     ArrayList<ElasticSearchData> elasticSearchData=new ArrayList<ElasticSearchData>();
-    for(EmployeeAccounts data:employeeData){
+    for(EmployeeAccounts data:employeeAccounts){
         elasticSearchData.add(new ElasticSearchData(data.getUid().toString(),data.getGoogleId(),data.getEmailId()));
     }
     elasticsearchOperations.putMapping(ElasticSearchData.class);

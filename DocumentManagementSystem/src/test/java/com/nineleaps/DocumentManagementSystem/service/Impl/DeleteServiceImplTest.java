@@ -4,28 +4,22 @@ import com.nineleaps.DocumentManagementSystem.dao.EmployeeAccounts;
 import com.nineleaps.DocumentManagementSystem.dao.EmployeeData;
 import com.nineleaps.DocumentManagementSystem.dto.TokenRequestedData;
 import com.nineleaps.DocumentManagementSystem.exceptions.CustomResponse;
+import com.nineleaps.DocumentManagementSystem.exceptions.FileTypeEmpty;
 import com.nineleaps.DocumentManagementSystem.repository.EmployeeAccountsRepository;
 import com.nineleaps.DocumentManagementSystem.repository.EmployeeDataRepository;
-import com.nineleaps.DocumentManagementSystem.service.Impl.DeleteServiceImpl;
-import com.nineleaps.DocumentManagementSystem.service.Impl.StatusTableServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 
 import java.io.File;
 import java.util.UUID;
 
-import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.mock;
@@ -59,11 +53,32 @@ public class DeleteServiceImplTest {
         when(employeeDataRepo.findFileRow("pancard", employeeAccounts.getUid().toString())).thenReturn(employeeData);
         doNothing().when(employeeDataRepo).deleteByUid(employeeData.getUid());
         doNothing().when(statusTableService).checkStatus("107583232828339878102");
-//        File file=mock(File.class);
-//        PowerMockito.whenNew(File.class).withAnyArguments().thenReturn(file);
-//        when(file.delete()).thenReturn(true);
+
         ResponseEntity<CustomResponse> customResponseResponseEntity = deleteService.deleteRecord("pancard", "107583232828339878102");
         assertEquals(customResponseResponseEntity.getStatusCode().getReasonPhrase(), "OK");
+
+        when(employeeAccountsRepo.findbyGoogleId("107583232828339878102")).thenReturn(employeeAccounts);
+        when(employeeDataRepo.findFileRow("pancard", employeeAccounts.getUid().toString())).thenReturn(employeeData);
+        doNothing().when(employeeDataRepo).deleteByUid(employeeData.getUid());
+        doNothing().when(statusTableService).checkStatus("107583232828339878102");
+        File file = mock(File.class);
+        PowerMockito.whenNew(File.class).withAnyArguments().thenReturn(file);
+        when(file.delete()).thenReturn(true);
+        ResponseEntity<CustomResponse> customResponseResponseEntity1 = deleteService.deleteRecord("pancard", "107583232828339878102");
+        assertEquals(customResponseResponseEntity1.getStatusCode().getReasonPhrase(), "OK");
+
+        when(employeeAccountsRepo.findbyGoogleId("107583232828339878102")).thenReturn(employeeAccounts);
+        when(employeeDataRepo.findFileRow("pancard", employeeAccounts.getUid().toString())).thenReturn(null);
+        doNothing().when(employeeDataRepo).deleteByUid(employeeData.getUid());
+        doNothing().when(statusTableService).checkStatus("107583232828339878102");
+        when(file.delete()).thenReturn(true);
+
+        ResponseEntity<CustomResponse> customResponseResponseEntity2 = deleteService.deleteRecord("pancard", "107583232828339878102");
+        assertEquals(customResponseResponseEntity2.getStatusCode().getReasonPhrase(), "OK");
+    }
+
+    @Test(expected = FileTypeEmpty.class)
+    public void deleteRecord1() throws Exception {
 
         when(employeeAccountsRepo.findbyGoogleId("107583232828339878102")).thenReturn(employeeAccounts);
         when(employeeDataRepo.findFileRow("pancard", employeeAccounts.getUid().toString())).thenReturn(null);
@@ -75,13 +90,5 @@ public class DeleteServiceImplTest {
         ResponseEntity<CustomResponse> customResponseResponseEntity1 = deleteService.deleteRecord("pancard", "107583232828339878102");
         assertEquals(customResponseResponseEntity1.getStatusCode().getReasonPhrase(), "OK");
 
-        when(employeeAccountsRepo.findbyGoogleId("107583232828339878102")).thenReturn(employeeAccounts);
-        when(employeeDataRepo.findFileRow("pancard", employeeAccounts.getUid().toString())).thenReturn(null);
-        doNothing().when(employeeDataRepo).deleteByUid(employeeData.getUid());
-        doNothing().when(statusTableService).checkStatus("107583232828339878102");
-
-
-        ResponseEntity<CustomResponse> customResponseResponseEntity2 = deleteService.deleteRecord("pancard", "107583232828339878102");
-        assertEquals(customResponseResponseEntity2.getStatusCode().getReasonPhrase(), "OK");
     }
 }
