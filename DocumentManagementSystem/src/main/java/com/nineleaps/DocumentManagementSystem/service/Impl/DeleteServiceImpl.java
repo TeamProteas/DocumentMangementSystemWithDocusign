@@ -19,15 +19,18 @@ import java.util.Date;
 
 @Service
 public class DeleteServiceImpl implements DeleteService {
+
     @Autowired
     EmployeeAccountsRepository employeeAccountsRepo;
+
     @Autowired
     EmployeeDataRepository employeeDataRepo;
+
     @Autowired
     TokenRequestedData tokenRequestedData;
+
     @Autowired
     StatusTableServiceImpl statusTableService;
-
 
     public ResponseEntity<CustomResponse> deleteRecord(String fileType, String userId) {
         String message = "Success";
@@ -38,12 +41,12 @@ public class DeleteServiceImpl implements DeleteService {
         if (employeeData == null) {
             message = "NoData";
             details = "No data found to delete";
-            throw new  FileTypeEmpty("File Type null");
-
+            throw new FileTypeEmpty("File Type null");
 
         } else {
             employeeDataRepo.deleteByUid(employeeData.getUid());
         }
+
         File file = new File("/home/nineleaps/Desktop/UserData/" + employeeAccounts.getUid().toString() + "/" + fileType);
         if (file.delete()) {
             System.out.println("File deleted successfully");

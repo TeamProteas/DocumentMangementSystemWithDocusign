@@ -12,36 +12,39 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Component
 public class StatusTableServiceImpl implements StatusTableService {
 
     @Autowired
     EmployeeAccountsRepository employeeAccountsRepository;
+
     @Autowired
     EmployeeDataRepository employeeDataRepository;
+
     @Autowired
     DocumentTypeRepository documentTypeRepository;
 
     @Override
-    public void checkStatus(String userId){
-        EmployeeAccounts employeeAccounts =employeeAccountsRepository.findbyGoogleId(userId);
+    public void checkStatus(String userId) {
+        EmployeeAccounts employeeAccounts = employeeAccountsRepository.findbyGoogleId(userId);
 
-        long docTypeEntries=documentTypeRepository.count();
-        List<EmployeeData> employeeData =employeeDataRepository.findByfolderUid(employeeAccounts.getUid().toString());
+        long docTypeEntries = documentTypeRepository.count();
+        List<EmployeeData> employeeData = employeeDataRepository.findByfolderUid(employeeAccounts.getUid().toString());
         //for all uploaded
-        int  employeeDataEntries=employeeData.size();
-        if(employeeDataEntries == docTypeEntries)
-            employeeAccountsRepository.updateallUploaded(true,employeeAccounts.getUid());
+        int employeeDataEntries = employeeData.size();
+        if (employeeDataEntries == docTypeEntries)
+            employeeAccountsRepository.updateallUploaded(true, employeeAccounts.getUid());
         else
-            employeeAccountsRepository.updateallUploaded(false,employeeAccounts.getUid());
+            employeeAccountsRepository.updateallUploaded(false, employeeAccounts.getUid());
 
         //for all verified
-        List<EmployeeData> employeeData1 =employeeDataRepository.findByfolderUidAndVerified(employeeAccounts.getUid().toString());
-        int employeeVerifiedDocEntries=employeeData1.size();
-        if(employeeVerifiedDocEntries == docTypeEntries)
-            employeeAccountsRepository.updateallVerified(true,employeeAccounts.getUid());
+        List<EmployeeData> employeeData1 = employeeDataRepository.findByfolderUidAndVerified(employeeAccounts.getUid().toString());
+        int employeeVerifiedDocEntries = employeeData1.size();
+        if (employeeVerifiedDocEntries == docTypeEntries)
+            employeeAccountsRepository.updateallVerified(true, employeeAccounts.getUid());
         else
-            employeeAccountsRepository.updateallVerified(false,employeeAccounts.getUid());
+            employeeAccountsRepository.updateallVerified(false, employeeAccounts.getUid());
 
     }
 

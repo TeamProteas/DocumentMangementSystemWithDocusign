@@ -1,18 +1,13 @@
 package com.nineleaps.DocumentManagementSystem.dao;
 
 import org.springframework.data.annotation.Id;
-
 import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.Table;
 
-
 import java.util.UUID;
-
 
 @Table("DocumentType")
 public class DocumentType {
-    public DocumentType() {
-    }
 
     @Id
     @Column(value = "uid")
@@ -23,6 +18,15 @@ public class DocumentType {
 
     @Column(value = "displayname")
     private String displayName;
+
+    public DocumentType() {
+    }
+
+    public DocumentType(UUID uid, String fileType, String displayName) {
+        this.uid = uid;
+        this.fileType = fileType;
+        this.displayName = displayName;
+    }
 
     public UUID getUid() {
         return uid;
@@ -45,12 +49,6 @@ public class DocumentType {
     }
 
     public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
-
-    public DocumentType(UUID uid, String fileType, String displayName) {
-        this.uid = uid;
-        this.fileType = fileType;
         this.displayName = displayName;
     }
 }

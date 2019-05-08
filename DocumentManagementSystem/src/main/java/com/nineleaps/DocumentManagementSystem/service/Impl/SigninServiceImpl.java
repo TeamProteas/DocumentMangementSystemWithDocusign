@@ -4,7 +4,6 @@ package com.nineleaps.DocumentManagementSystem.service.Impl;
 import com.nineleaps.DocumentManagementSystem.dao.EmployeeAccounts;
 import com.nineleaps.DocumentManagementSystem.dto.SigninResponseData;
 import com.nineleaps.DocumentManagementSystem.dto.TokenRequestedData;
-import com.nineleaps.DocumentManagementSystem.exceptions.SignInUserDataNotFound;
 import com.nineleaps.DocumentManagementSystem.repository.EmployeeAccountsRepository;
 import com.nineleaps.DocumentManagementSystem.service.SignInService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +19,6 @@ public class SigninServiceImpl implements SignInService {
 
     @Autowired
     TokenRequestedData tokenRequestedData;
-
-
 
     @Override
     public SigninResponseData authorizeUser() {
@@ -42,10 +39,8 @@ public class SigninServiceImpl implements SignInService {
         File file = new File(uid);
         file.mkdir();
 
-
         return signinResponseData;
     }
-
 }
 
 

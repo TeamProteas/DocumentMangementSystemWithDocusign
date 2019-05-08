@@ -7,23 +7,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @CrossOrigin
 public class AddDocumentTypeController {
+
     @Autowired
     AddDocumentTypeServiceImpl addDocumentTypeService;
 
-
     @PostMapping("/v1/doctype/add")
-    public ResponseEntity<CustomResponse> getNewDoctype( @RequestParam("fileType") String fileType, @RequestParam("displayName") String displayName) {
+    public ResponseEntity<CustomResponse> getNewDoctype(@RequestParam("fileType") String fileType, @RequestParam("displayName") String displayName) {
 
         return addDocumentTypeService.addDoctype(fileType, displayName);
-
-
     }
-
-
 }

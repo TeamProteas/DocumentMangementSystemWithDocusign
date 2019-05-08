@@ -13,7 +13,6 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
     @Autowired
     DocumentTypeRepository documentTypeRepo;
 
-
     @Override
     public List<DocumentType> fetchTypeOfDocument() {
 

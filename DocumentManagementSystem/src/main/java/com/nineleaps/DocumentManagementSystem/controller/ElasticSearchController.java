@@ -11,14 +11,13 @@ import java.util.List;
 @CrossOrigin
 public class ElasticSearchController {
 
-
     @Autowired
     private ElasticSearchQueryBuilder elasticSearchQueryBuilder;
 
     @ResponseBody
     @GetMapping(value = "/v1/search")
     public List<ElasticSearchData> getAll(@RequestParam("text") String text) {
-        System.out.println(text);
+
         return elasticSearchQueryBuilder.getAll(text);
     }
 

@@ -28,40 +28,40 @@ public class DocumentExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<CustomResponse>(customResponse, HttpStatus.FORBIDDEN);
     }
 
-        @ExceptionHandler(NotAllowedToUpload.class)
-        public final ResponseEntity<CustomResponse> notAllowedToUpload(NotAllowedToUpload ex, WebRequest webRequest){
-            CustomResponse customResponse = new CustomResponse(new Date(), ex.getMessage(), webRequest.
-                    getDescription(false), HttpStatus.UNAUTHORIZED.getReasonPhrase());
-            return new ResponseEntity<CustomResponse>(customResponse, HttpStatus.UNAUTHORIZED);
+    @ExceptionHandler(NotAllowedToUpload.class)
+    public final ResponseEntity<CustomResponse> notAllowedToUpload(NotAllowedToUpload ex, WebRequest webRequest) {
+        CustomResponse customResponse = new CustomResponse(new Date(), ex.getMessage(), webRequest.
+                getDescription(false), HttpStatus.UNAUTHORIZED.getReasonPhrase());
+        return new ResponseEntity<CustomResponse>(customResponse, HttpStatus.UNAUTHORIZED);
 
 
-        }
-
-
-        @ExceptionHandler(ViewNoRecordsFound.class)
-        public final ResponseEntity<CustomResponse> noRecordsFound(ViewNoRecordsFound ex, WebRequest webRequest){
-            CustomResponse customResponse = new CustomResponse(new Date(), ex.getMessage(), webRequest.
-                    getDescription(false), HttpStatus.NOT_FOUND.getReasonPhrase());
-            return new ResponseEntity<CustomResponse>(customResponse, HttpStatus.NOT_FOUND);
-        }
-
-
-        @ExceptionHandler(UploadError.class)
-        public final ResponseEntity<CustomResponse> uploadError(UploadError ex, WebRequest webRequest){
-            CustomResponse customResponse = new CustomResponse(new Date(), ex.getMessage(), webRequest.
-                    getDescription(false), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
-            return new ResponseEntity<CustomResponse>(customResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-
-        }
-
-        @ExceptionHandler(FileTypeEmpty.class)
-        public final ResponseEntity<CustomResponse> fileEmpty(FileTypeEmpty ex, WebRequest webRequest){
-            CustomResponse customResponse = new CustomResponse(new Date(), ex.getMessage(), webRequest.
-                    getDescription(false), HttpStatus.NOT_ACCEPTABLE.getReasonPhrase());
-            return new ResponseEntity<CustomResponse>(customResponse, HttpStatus.NOT_ACCEPTABLE);
-
-        }
     }
+
+
+    @ExceptionHandler(ViewNoRecordsFound.class)
+    public final ResponseEntity<CustomResponse> noRecordsFound(ViewNoRecordsFound ex, WebRequest webRequest) {
+        CustomResponse customResponse = new CustomResponse(new Date(), ex.getMessage(), webRequest.
+                getDescription(false), HttpStatus.NOT_FOUND.getReasonPhrase());
+        return new ResponseEntity<CustomResponse>(customResponse, HttpStatus.NOT_FOUND);
+    }
+
+
+    @ExceptionHandler(UploadError.class)
+    public final ResponseEntity<CustomResponse> uploadError(UploadError ex, WebRequest webRequest) {
+        CustomResponse customResponse = new CustomResponse(new Date(), ex.getMessage(), webRequest.
+                getDescription(false), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
+        return new ResponseEntity<CustomResponse>(customResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+
+    }
+
+    @ExceptionHandler(FileTypeEmpty.class)
+    public final ResponseEntity<CustomResponse> fileEmpty(FileTypeEmpty ex, WebRequest webRequest) {
+        CustomResponse customResponse = new CustomResponse(new Date(), ex.getMessage(), webRequest.
+                getDescription(false), HttpStatus.NOT_ACCEPTABLE.getReasonPhrase());
+        return new ResponseEntity<CustomResponse>(customResponse, HttpStatus.NOT_ACCEPTABLE);
+
+    }
+}
 
 
 

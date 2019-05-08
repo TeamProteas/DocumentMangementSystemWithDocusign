@@ -16,17 +16,15 @@ import java.io.IOException;
 @RestController
 @CrossOrigin
 public class SignInController {
+
     @Autowired
     SigninServiceImpl signServiceImpl;
 
-
     @ResponseBody
-
     @GetMapping("/v1/signin")
     public SigninResponseData signInRequest() throws IOException, ParseException {
-        System.out.println("SIGNIN:");
-        return signServiceImpl.authorizeUser();
 
+        return signServiceImpl.authorizeUser();
     }
 }
 

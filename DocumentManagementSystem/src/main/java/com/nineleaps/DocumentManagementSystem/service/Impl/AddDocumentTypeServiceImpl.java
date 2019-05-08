@@ -1,12 +1,8 @@
 package com.nineleaps.DocumentManagementSystem.service.Impl;
 
 import com.nineleaps.DocumentManagementSystem.dao.DocumentType;
-import com.nineleaps.DocumentManagementSystem.dao.EmployeeAccounts;
-import com.nineleaps.DocumentManagementSystem.dao.EmployeeData;
 import com.nineleaps.DocumentManagementSystem.exceptions.CustomResponse;
 import com.nineleaps.DocumentManagementSystem.repository.DocumentTypeRepository;
-import com.nineleaps.DocumentManagementSystem.repository.EmployeeAccountsRepository;
-import com.nineleaps.DocumentManagementSystem.repository.EmployeeDataRepository;
 import com.nineleaps.DocumentManagementSystem.service.AddDocumentTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +17,6 @@ public class AddDocumentTypeServiceImpl implements AddDocumentTypeService {
     @Autowired
     DocumentTypeRepository documentTypeRepository;
 
-
     @Override
     public ResponseEntity<CustomResponse> addDoctype(String fileType, String displayName) {
 
@@ -29,7 +24,5 @@ public class AddDocumentTypeServiceImpl implements AddDocumentTypeService {
         CustomResponse customResponse = new CustomResponse(new Date(), "Type Uploaded Sucesssfully", "the changes are made to the database", HttpStatus.OK.getReasonPhrase());
 
         return new ResponseEntity<CustomResponse>(customResponse, HttpStatus.OK);
-
-
     }
 }

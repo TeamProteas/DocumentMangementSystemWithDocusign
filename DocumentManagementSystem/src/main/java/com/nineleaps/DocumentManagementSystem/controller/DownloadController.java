@@ -23,8 +23,7 @@ public class DownloadController {
 
     @GetMapping(value="/v1/download")
     public ResponseEntity<Object> DownloadFile( @RequestParam("fileType") String fileType) throws IOException, ParseException {
-        System.out.println("DOWNLOAD:");
-        return downloadServiceImpl.giveFile(fileType);
 
+        return downloadServiceImpl.giveFile(fileType);
     }
 }

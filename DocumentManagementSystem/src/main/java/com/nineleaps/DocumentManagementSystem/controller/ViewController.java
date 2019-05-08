@@ -13,14 +13,14 @@ import java.util.List;
 @CrossOrigin
 @RestController
 public class ViewController {
+
     @Autowired
     ViewServiceImpl viewServiceImpl;
 
     @ResponseBody
     @GetMapping("v1/view")
     public List<EmployeeData> getView(@RequestParam("userId") String userId) throws IOException, ParseException {
-        System.out.println("VIEW:");
+
         return viewServiceImpl.fetchViewData(userId);
     }
-
 }

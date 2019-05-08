@@ -21,27 +21,18 @@ import java.net.InetAddress;
 @EnableElasticsearchRepositories(basePackages = "com.nineleaps.DocumentManagementSystem.repository")
 public class ElasticSearchConfig {
 
-
-//    @Bean
-//    public ElasticsearchOperations elasticsearchTemplate() throws Exception {
-//        return new ElasticsearchTemplate(client());
-//    }
-
     @Bean
     public Client client() throws IOException {
 
         System.setProperty("es.set.netty.runtime.available.processors", "false");
-
         Settings esSettings = Settings.builder()
                 .put("cluster.name", "elasticsearch")
                 .build();
         TransportClient client = new PreBuiltTransportClient(esSettings);
-
         client.addTransportAddress(new TransportAddress(InetAddress.getByName("localhost"), 9300));
 
         return client;
     }
-
 
     @Bean
     public JestClient jestClient() {
@@ -51,6 +42,7 @@ public class ElasticSearchConfig {
                 .Builder("http://localhost:9200")
                 .multiThreaded(true)
                 .build());
+
         return factory.getObject();
     }
 }

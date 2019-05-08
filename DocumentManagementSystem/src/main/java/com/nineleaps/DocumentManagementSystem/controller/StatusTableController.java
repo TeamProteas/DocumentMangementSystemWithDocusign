@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @CrossOrigin
 public class StatusTableController {
+
     @Autowired
     StatusTableServiceImpl statusTableService;
 
@@ -20,7 +21,5 @@ public class StatusTableController {
     @ResponseBody
     public List<StatusTableData> getstatus() {
         return statusTableService.getTableData();
-
-
     }
 }

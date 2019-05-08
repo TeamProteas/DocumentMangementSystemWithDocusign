@@ -1,18 +1,38 @@
 package com.nineleaps.DocumentManagementSystem.dao;
 
-
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.Table;
 
-import java.sql.Timestamp;
 import java.util.UUID;
 
-
-@Table(value="EmployeeAccounts")
+@Table(value = "EmployeeAccounts")
 public class EmployeeAccounts {
+    @Id
+    @PrimaryKeyColumn(name = "uid")
+    UUID uid = UUID.randomUUID();
+    @Column(value = "alluploaded")
+    private boolean allUploaded;
+    @Column(value = "emailid")
+    private String emailId;
+    @Column(value = "allverified")
+    private boolean allVerified;
+    @Column(value = "employeeid")
+    private String employeeId;
+    @Column(value = "googleid")
+    private String googleId;
+    @Column(value = "dateofbirth")
+    private long dateOfBirth;
+    @Column(value = "dateofjoining")
+    private long dateOfJoining;
+    @Column(value = "designation")
+    private String designation;
+    @Column(value = "firstname")
+    private String firstName;
+    @Column(value = "lastname")
+    private String lastName;
+
     public EmployeeAccounts() {
     }
 
@@ -29,19 +49,6 @@ public class EmployeeAccounts {
         this.lastName = lastName;
     }
 
-    @Id
-    @PrimaryKeyColumn(name = "uid")
-    UUID uid= UUID.randomUUID();
-
-    @Column(value="alluploaded")
-    private boolean allUploaded;
-
-    @Column(value="emailid")
-    private String emailId;
-
-    @Column(value="allverified")
-    private boolean allVerified;
-
     public boolean isAllUploaded() {
         return allUploaded;
     }
@@ -57,27 +64,6 @@ public class EmployeeAccounts {
     public void setAllVerified(boolean allVerified) {
         this.allVerified = allVerified;
     }
-
-    @Column(value = "employeeid")
-    private String employeeId;
-
-    @Column(value = "googleid")
-    private String googleId;
-
-    @Column(value = "dateofbirth")
-    private long dateOfBirth;
-
-    @Column(value = "dateofjoining")
-    private long dateOfJoining;
-
-    @Column(value = "designation")
-    private String designation;
-
-    @Column(value = "firstname")
-    private String firstName;
-
-    @Column(value = "lastname")
-    private String lastName;
 
     public UUID getUid() {
         return uid;

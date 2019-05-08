@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface EmployeeDataRepository extends CassandraRepository<EmployeeData,String> {
+public interface EmployeeDataRepository extends CassandraRepository<EmployeeData, String> {
     @Query("select * from employeedata where folderuid=?0 Allow Filtering")
     public List<EmployeeData> findByfolderUid(String str);
 
@@ -24,8 +24,7 @@ public interface EmployeeDataRepository extends CassandraRepository<EmployeeData
     public void deleteByUid(UUID uid);
 
     @Query("update employeedata set verifiedstatus = ?0 where uid=?1 ")
-    public void setVerifyStatus(boolean verifyStatus,UUID uid);
-
+    public void setVerifyStatus(boolean verifyStatus, UUID uid);
 
 
 }

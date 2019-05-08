@@ -33,13 +33,10 @@ public class DocumentManagementInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object handler) throws Exception {
+        System.out.println(req.getRequestURI());
         if (!req.getMethod().equalsIgnoreCase("OPTIONS")) {
-            String fileType = req.getParameter("fileType");
             String userId = req.getParameter("userId");
             String tokenId = req.getHeader("tokenid");
-            System.out.println(req.getRequestURI());
-
-            System.out.println("TOKENID " + req.getHeader("tokenId"));
 
             CloseableHttpClient client;
             client = HttpClients.createDefault();
@@ -59,7 +56,6 @@ public class DocumentManagementInterceptor extends HandlerInterceptorAdapter {
 
             HttpEntity entity = closeableHttpResponse.getEntity();
             String responseString = EntityUtils.toString(entity, "UTF-8");
-            System.out.println(responseString);
 
             //VALIDATING THE USER INFORMATION PROVIDED IN THE TOKEN
 
@@ -83,9 +79,6 @@ public class DocumentManagementInterceptor extends HandlerInterceptorAdapter {
             tokenRequestedData.setUserId(userId);
 
             if (req.getRequestURI().equals("/v1/upload")) {
-                System.out.println(req.getParameter("fileType"));
-                String f = req.getParameter("file");
-                System.out.println(f);
                 accessControl(googleid, userId);
             }
             return value;
@@ -93,10 +86,10 @@ public class DocumentManagementInterceptor extends HandlerInterceptorAdapter {
         return true;
     }
 
-
     public void accessControl(String googleid, String userId) {
         EmployeeAccounts employeeAccounts = employeeAccountsRepo.findbyGoogleId(googleid);
         if (!googleid.equals(userId) && !employeeAccounts.getDesignation().equals("HR")) {
             throw new NotAllowedToUpload("You are not allowed to upload into other employee accounts");
         }
-    }}
+    }
+}

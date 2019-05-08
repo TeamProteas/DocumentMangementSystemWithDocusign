@@ -16,10 +16,13 @@ import java.util.Date;
 
 @Component
 public class VerifyServiceImpl implements VerifyService {
+
     @Autowired
     EmployeeDataRepository employeeDataRepository;
+
     @Autowired
     EmployeeAccountsRepository employeeAccountsRepository;
+
     @Autowired
     StatusTableServiceImpl statusTableService;
 
@@ -40,6 +43,5 @@ public class VerifyServiceImpl implements VerifyService {
         statusTableService.checkStatus(userId);
 
         return new ResponseEntity<CustomResponse>(customResponse, HttpStatus.OK);
-
     }
 }

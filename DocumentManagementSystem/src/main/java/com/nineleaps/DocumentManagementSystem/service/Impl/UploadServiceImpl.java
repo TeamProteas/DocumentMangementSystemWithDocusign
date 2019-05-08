@@ -25,12 +25,16 @@ import java.util.UUID;
 
 @Component
 public class UploadServiceImpl implements UploadService {
+
     @Autowired
     EmployeeAccountsRepository employeeAccountsRepo;
+
     @Autowired
     EmployeeDataRepository employeeDataRepo;
+
     @Autowired
     TokenRequestedData tokenRequestedData;
+
     @Autowired
     StatusTableServiceImpl statusTableService;
 
@@ -38,7 +42,7 @@ public class UploadServiceImpl implements UploadService {
     @Override
     public ResponseEntity<CustomResponse> storeData(MultipartFile multipartFile, String fileType, String userId) throws IOException, ParseException {
 
-// FETCHING THE REQUIRED EMAIL RECORD AND THEN USING THE UID TO STORE AS FOLDERUID IN EMPLOYEE DATA
+        // FETCHING THE REQUIRED EMAIL RECORD AND THEN USING THE UID TO STORE AS FOLDERUID IN EMPLOYEE DATA
         long currentTime = Instant.now().toEpochMilli();
         EmployeeAccounts employeeAccountsId = employeeAccountsRepo.findbyGoogleId(userId);
         EmployeeAccounts employeeAccountsTokenId = employeeAccountsRepo.findbyGoogleId(tokenRequestedData.getGoogleId());
@@ -64,11 +68,9 @@ public class UploadServiceImpl implements UploadService {
                 EmployeeData employeeData = new EmployeeData(UUID.randomUUID(), fileType, employeeAccountsId.getUid().toString(), false, multipartFile.getOriginalFilename(), tokenRequestedData.getUserName(), currentTime);
                 employeeDataRepo.save(employeeData);
             }
-        }
-        else {
+        } else {
             throw new NotAllowedToUpload("You are not allowed to upload into other employee accounts");
         }
-
 
         //saving data to the system
         try {

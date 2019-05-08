@@ -1,15 +1,23 @@
 package com.nineleaps.DocumentManagementSystem.dto;
 
 public class StatusTableData {
-    public StatusTableData() {
-    }
-
     private String emailId;
     private String employeeId;
     private boolean allVerified;
-    private  boolean allUploaded;
+    private boolean allUploaded;
     private String firstName;
-    private  String lastName;
+    private String lastName;
+    public StatusTableData() {
+    }
+
+    public StatusTableData(String emailId, String employeeId, boolean allVerified, boolean allUploaded, String firstName, String lastName) {
+        this.emailId = emailId;
+        this.employeeId = employeeId;
+        this.allVerified = allVerified;
+        this.allUploaded = allUploaded;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
     public String getEmailId() {
         return emailId;
@@ -56,15 +64,6 @@ public class StatusTableData {
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public StatusTableData(String emailId, String employeeId, boolean allVerified, boolean allUploaded, String firstName, String lastName) {
-        this.emailId = emailId;
-        this.employeeId = employeeId;
-        this.allVerified = allVerified;
-        this.allUploaded = allUploaded;
-        this.firstName = firstName;
         this.lastName = lastName;
     }
 }

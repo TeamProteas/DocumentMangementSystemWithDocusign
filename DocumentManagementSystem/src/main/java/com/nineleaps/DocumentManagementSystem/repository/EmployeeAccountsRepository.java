@@ -24,10 +24,10 @@ public interface EmployeeAccountsRepository extends CassandraRepository<Employee
     void updateGoogleId(String googleid, UUID uid);
 
     @Query("update EmployeeAccounts SET alluploaded=?0 WHERE uid=?1")
-    void updateallUploaded(boolean allUploaded,UUID Uid);
+    void updateallUploaded(boolean allUploaded, UUID Uid);
 
     @Query("update EmployeeAccounts SET allverified=?0 WHERE uid=?1")
-    void updateallVerified(boolean allVerified,UUID Uid);
+    void updateallVerified(boolean allVerified, UUID Uid);
 
 
     @Query(allowFiltering = true)

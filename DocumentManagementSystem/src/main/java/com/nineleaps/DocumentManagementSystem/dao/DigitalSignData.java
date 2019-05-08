@@ -1,39 +1,32 @@
 package com.nineleaps.DocumentManagementSystem.dao;
 
 import org.springframework.data.annotation.Id;
-
 import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.Table;
-
 
 import java.util.UUID;
 
 @Table("DigitalSignData")
 public class DigitalSignData {
-    public DigitalSignData() {
-    }
 
     @Id
     @Column("uid")
     UUID uid = UUID.randomUUID();
-
     @Column("filename")
     private String filename;
-
     @Column("person")
     private String person;
-
     @Column("documentId")
     private String documentId;
-
     @Column("signatureRequestId")
     private String signatureRequestId;
-
     @Column("signedby")
     private String signedby;
-
     @Column("documentName")
     private String documentName;
+
+    public DigitalSignData() {
+    }
 
     public DigitalSignData(UUID uid, String documentId, String filename, String person, String signatureRequestId, String signedby, String documentName) {
         this.uid = uid;

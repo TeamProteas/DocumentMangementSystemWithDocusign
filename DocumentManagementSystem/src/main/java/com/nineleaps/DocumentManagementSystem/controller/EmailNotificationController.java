@@ -22,7 +22,7 @@ public class EmailNotificationController {
 
     @PostMapping("/v1/sendhtml")
     public ResponseEntity<CustomResponse> htmlMail(@RequestBody EmailNotificationData emailNotificationData) throws MessagingException {
-        System.out.println("EMAIL NOTIFICATION CONTROLLER:");
+
         return notificationImpl.sendHtmlMail(emailNotificationData.getEmailAddress(), "template", emailNotificationData.getName(), emailNotificationData.getDescription());
 
     }

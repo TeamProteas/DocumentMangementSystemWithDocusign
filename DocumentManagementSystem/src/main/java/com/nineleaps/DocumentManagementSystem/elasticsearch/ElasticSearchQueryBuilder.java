@@ -10,13 +10,13 @@ import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilde
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+
 @Component
 public class ElasticSearchQueryBuilder {
 
 
     @Autowired
     private ElasticsearchTemplate elasticsearchTemplate;
-
 
     public List<ElasticSearchData> getAll(String text) {
 
@@ -28,8 +28,6 @@ public class ElasticSearchQueryBuilder {
                 ).should(QueryBuilders.queryStringQuery(text + "*")
                         .lenient(true)
                         .field("emailId"));
-
-
         NativeSearchQuery build = new NativeSearchQueryBuilder()
                 .withQuery(query)
                 .build();

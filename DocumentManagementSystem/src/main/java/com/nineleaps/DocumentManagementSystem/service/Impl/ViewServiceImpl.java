@@ -19,7 +19,6 @@ public class ViewServiceImpl implements ViewService {
     @Autowired
     EmployeeAccountsRepository employeeAccountsRepo;
 
-
     @Override
     public List<EmployeeData> fetchViewData(String userId) {
         EmployeeAccounts employeeAccounts = employeeAccountsRepo.findbyGoogleId(userId);
@@ -29,7 +28,7 @@ public class ViewServiceImpl implements ViewService {
         // IF NO DOCUMENTS ARE PRESENT IN THE DATABASE THEN THROW AN EXCEPTION
         System.out.println(employeeData.size());
         if (employeeData.size() == 0) {
-            List<EmployeeData> employeeData1=new ArrayList<EmployeeData>();
+            List<EmployeeData> employeeData1 = new ArrayList<EmployeeData>();
             return employeeData1;
         }
         return employeeData;

@@ -49,12 +49,12 @@ public class DigitalSignImpl implements DigitalSignService {
         Client client = new Client("ZZlAEJyoeHkBIuezNagwtaXZxaXWQJyUyHpVgzRamorLNVQCieYiyyhQsdYgmDxUxrWbwIXhdMFHTzvjcMwvsR", false);
 
         Response response = client.createSignature(signFiles, recipients);
+
         //extracting response
         ResponseBody responseBody = response.body();
         String a = responseBody.toString();
         JSONObject json = (JSONObject) new JSONParser().parse(a);
         String id = (String) json.get("id");
-        System.out.println(id);
 
         //updating database
         DigitalSignData digitalSignData = new DigitalSignData(UUID.randomUUID(), null, file.getOriginalFilename(), name, id, signeeName, documentName);

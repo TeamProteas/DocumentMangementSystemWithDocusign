@@ -30,22 +30,23 @@ public class CheckStatusImpl implements CheckStatusService {
         CustomResponse customResponse = new CustomResponse(new Date(), "No Data Found",
                 "Current Status ", HttpStatus.CREATED.getReasonPhrase());
 
+
         //create signaturit client
         Client client = new Client("ZZlAEJyoeHkBIuezNagwtaXZxaXWQJyUyHpVgzRamorLNVQCieYiyyhQsdYgmDxUxrWbwIXhdMFHTzvjcMwvsR", false);
+
 
         //find person's credentials
         DigitalSignData digitalSignData;
         try {
             digitalSignData = digitalSignRepo.findDocumentRow(name, documentname);
         } catch (Exception e) {
-            return new ResponseEntity<CustomResponse>(customResponse,HttpStatus.NO_CONTENT);
+            return new ResponseEntity<CustomResponse>(customResponse, HttpStatus.NO_CONTENT);
         }
 
         //get status
         Response response = client.getSignature(digitalSignData.getSignatureRequestId());
-        ResponseBody responseBody=response.body();
+        ResponseBody responseBody = response.body();
         String bodyString = responseBody.toString();
-        System.out.println(bodyString);
 
         //extract document id
         JSONObject json = (JSONObject) new JSONParser().parse(bodyString);
@@ -54,13 +55,11 @@ public class CheckStatusImpl implements CheckStatusService {
         JSONObject json1 = (JSONObject) new JSONParser().parse(assignObject.toString());
         String signStatus = (String) json1.get("status");
         String documentId = (String) json1.get("id");
-        System.out.println(documentId);
-        System.out.println(signStatus);
 
         digitalSignData.setDocumentId(documentId);
         digitalSignRepo.save(digitalSignData);
         customResponse.setMessage(signStatus);
-        return new ResponseEntity<CustomResponse>(customResponse,HttpStatus.OK);
+        return new ResponseEntity<CustomResponse>(customResponse, HttpStatus.OK);
     }
 }
 

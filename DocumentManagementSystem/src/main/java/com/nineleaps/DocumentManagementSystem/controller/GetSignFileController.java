@@ -20,7 +20,7 @@ public class GetSignFileController {
 
     @RequestMapping("/v1/getfile")
     public ResponseEntity<CustomResponse> getFile(@RequestParam("name") String name, @RequestParam("documentname") String documentname) throws IOException {
-        System.out.println("GETFILE");
+
         return getSignFileImpl.getFile(name, documentname);
 
     }

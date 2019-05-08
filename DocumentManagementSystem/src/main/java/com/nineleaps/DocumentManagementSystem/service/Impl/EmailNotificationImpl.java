@@ -20,11 +20,11 @@ import java.util.Date;
 @Service
 public class EmailNotificationImpl implements EmailNotificationService {
 
-        @Autowired
-        JavaMailSender javaMailSender;
+    @Autowired
+    JavaMailSender javaMailSender;
 
-        @Autowired
-        TemplateEngine templateEngine;
+    @Autowired
+    TemplateEngine templateEngine;
 
     public ResponseEntity<CustomResponse> sendHtmlMail(String To, String templateName, String name, String description) throws MessagingException, MailException {
         //set context
@@ -34,11 +34,11 @@ public class EmailNotificationImpl implements EmailNotificationService {
         context.setVariable("description", description);
 
         //process html template
-            String body = templateEngine.process(templateName, context);
+        String body = templateEngine.process(templateName, context);
 
         // sending mail
-        MimeMessage mail     = javaMailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mail,true);
+        MimeMessage mail = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mail, true);
         helper.setTo(To);
         helper.setSubject("html mail");
         helper.setText(body, true);
@@ -47,9 +47,6 @@ public class EmailNotificationImpl implements EmailNotificationService {
         CustomResponse customResponse = new CustomResponse(new Date(), "Success",
                 "Message Sent Sucessfully!", HttpStatus.OK.getReasonPhrase());
         return new ResponseEntity<CustomResponse>(customResponse, HttpStatus.OK);
-
-
     }
-
 }
 
