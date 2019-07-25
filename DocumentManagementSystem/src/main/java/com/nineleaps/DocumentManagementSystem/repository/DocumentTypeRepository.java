@@ -12,5 +12,4 @@ public interface DocumentTypeRepository extends CassandraRepository<DocumentType
 
     @Query("SELECT * FROM DocumentType")
     public List<DocumentType> findFileType();
-
 }

@@ -8,4 +8,6 @@ public interface DigitalSignRepository extends CassandraRepository<DigitalSignDa
 
     @Query("select * from digitalsigndata where person=?0 and documentname=?1 Allow Filtering")
     public DigitalSignData findDocumentRow(String person, String documentname);
+
+
 }

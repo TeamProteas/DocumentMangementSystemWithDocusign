@@ -29,7 +29,6 @@ public interface EmployeeAccountsRepository extends CassandraRepository<Employee
     @Query("update EmployeeAccounts SET allverified=?0 WHERE uid=?1")
     void updateallVerified(boolean allVerified, UUID Uid);
 
-
     @Query(allowFiltering = true)
     boolean existsByEmailId(String emailId);
 
